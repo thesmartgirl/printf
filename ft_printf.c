@@ -29,59 +29,67 @@
   with a conversion specifier. In between there may be (in this order) zero or
 	more flags, an optional minimum field width, an optional precision and an
 	optional length modifier.*/
-#include "libftprintf.h"
+	#include <stdio.h>
+	#include <stdarg.h>
 
-typedef void (*format_func)(va_list *args);  // Define the function pointer type
+	typedef void (*format_func)(va_list *args);  // Define the function pointer type
 
-format_func format_handlers[128];
+	void handle_integer(va_list *args) {
+	    int i = va_arg(*args, int);  // Extract integer from args
+	    printf("%d", i);            // Print the integer
+	}
 
-void handle_integer(va_list *args) {
-    int i = va_arg(*args, int);  // Extract integer from args
-    printf("integer %d", i);            // Print the integer
-}
+	void handle_string(va_list *args) {
+	    char *s = va_arg(*args, char *);  // Extract string from args
+	    printf("%s", s);                 // Print the string
+	}
 
-void handle_string(va_list *args) {
-    char *s = va_arg(*args, char *);  // Extract string from args
-    printf("%s", s);                 // Print the string
-}
+	void handle_char(va_list *args) {
+	    int c = va_arg(*args, int);  // Extract character from args (promoted to int)
+	    printf("%c", c);             // Print the character
+	}
 
-void handle_char(va_list *args) {
-    // 'char' is promoted to 'int' in varargs, so extract as 'int'
-    int c = va_arg(*args, int);
-    printf("char %c", c);  // Print the character
-}
+	format_func* init_format_handlers() {
+	    static format_func format_handlers[128] = {NULL};  // Static array of function pointers
+	    if (format_handlers['d'] == NULL) {  // Initialize only once
+	        format_handlers['d'] = handle_integer;
+	        format_handlers['c'] = handle_char;
+	        format_handlers['s'] = handle_string;
+	    }
+	    return format_handlers;  // Return the pointer to the array
+	}
 
-void init_format_handlers() {
-    format_handlers['d'] = handle_integer;
-    format_handlers['c'] = handle_char;
-    format_handlers['s'] = handle_string;
-}
+	void ft_printf(const char *format, ...) {
+	    va_list args;
+	    format_func	*format_handlers;	//array of function pointers
+			format_func handler; 					//chosen handler
+			const char *p;
 
-void ft_printf(const char *format, ...) {
-    va_list args;
-    va_start(args, format);
+			va_start(args, format);				// Initialize the va_list
+	    format_handlers = init_format_handlers();  // Get the pointer to the handlers
+	    p = format;
+	    while (*p)
+			{
+	        if (*p == '%' && format_handlers[(int) *(p + 1)])
+					{
+	            p++;  // Move past '%'
+	            handler = format_handlers[(int) *p];
+	            handler(&args);  // Call the handler, passing the va_list
+	        }
+					else
+				 {
+	            putchar(*p);  // Print regular characters
+	        }
+	        p++;
+	    }
+	    va_end(args);  // Clean up the va_list
+	}
 
-    init_format_handlers();  // Initialize function pointers
+	int main() {
+	    ft_printf("Hello %s! I have %d apples and %c oranges.\n", "world", 5, 'A');
+	    return 0;
+	}
 
-    const char *p = format;
-    while (*p)
-		{
-        if (*p == '%' && format_handlers[(int) *(p + 1)]) {
-            p++;  // Move past '%'
-            format_func handler = format_handlers[(int) *p];
-            handler(&args);  // Call the handler
-        } else {
-            putchar(*p);  // Print regular characters
-        }
-        p++;
-    }
-    va_end(args);
-}
-
-int main() {
-    ft_printf("Hello %s! I have %d apples and %c oranges.\n", "world", 5, 'A');
-    return 0;
-}
 
 /*
 int ft_printf(const char *fmt, ...)
