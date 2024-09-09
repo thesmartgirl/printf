@@ -29,11 +29,7 @@
   with a conversion specifier. In between there may be (in this order) zero or
 	more flags, an optional minimum field width, an optional precision and an
 	optional length modifier.*/
-	#include <stdio.h>
-	#include <stdarg.h>
-
-	typedef void (*format_func)(va_list *args);  // Define the function pointer type
-
+#include "libftprintf.h"
 	void handle_integer(va_list *args) {
 	    int i = va_arg(*args, int);  // Extract integer from args
 	    printf("%d", i);            // Print the integer
