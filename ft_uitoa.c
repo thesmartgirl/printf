@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,28 +9,35 @@
 /*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdlib.h>
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+static size_t	ft_numlen(unsigned int n)
+{
+	size_t	len;
 
-#include "../libft/libft.h"
-#include <stdarg.h>
-#include <stdbool.h>
-#include <stdint.h>
+	len = 1;
+	while (n >= 10)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
 
-typedef int	(*t_format_func)(va_list *args);
+char	*ft_uitoa(unsigned int n)
+{
+	char	*str;
+	size_t	len;
 
-int			ft_handle_char(va_list *args);
-int			ft_handle_integer(va_list *args);
-int			ft_handle_string(va_list *args);
-int			ft_handle_pointer(va_list *args);
-int     ft_handle_udecimal(va_list *args);
-int     ft_handle_hex(va_list *args);
-int     ft_handle_hex_caps(va_list *args);
-int     ft_handle_percentage(va_list *args);
-int			ft_printf(const char *fmt, ...);
-int     ft_putnbr_hex_fd(uintptr_t nbr, bool caps, int fd);
-char		*ft_uitoa(unsigned int n);
-
-
-#endif
+	len = ft_numlen(n);
+	str = (char *)malloc(len + 1);
+	if (!str)
+		return (NULL);
+	str[len] = '\0';
+	while (len--)
+	{
+		str[len] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (str);
+}

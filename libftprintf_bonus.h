@@ -10,27 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef LIBFTPRINTF_BONUS_H
+# define LIBFTPRINTF_BONUS_H
 
-#include "../libft/libft.h"
-#include <stdarg.h>
-#include <stdbool.h>
-#include <stdint.h>
+# include "libftprintf.h"
 
-typedef int	(*t_format_func)(va_list *args);
-
-int			ft_handle_char(va_list *args);
-int			ft_handle_integer(va_list *args);
-int			ft_handle_string(va_list *args);
-int			ft_handle_pointer(va_list *args);
-int     ft_handle_udecimal(va_list *args);
-int     ft_handle_hex(va_list *args);
-int     ft_handle_hex_caps(va_list *args);
-int     ft_handle_percentage(va_list *args);
-int			ft_printf(const char *fmt, ...);
-int     ft_putnbr_hex_fd(uintptr_t nbr, bool caps, int fd);
-char		*ft_uitoa(unsigned int n);
-
+typedef struct s_format_flags
+{
+	int	flag_hash;
+	int	flag_zero;
+	int	flag_minus;
+	int	flag_plus;
+	int	flag_space;
+	int	field_width;
+	int	precision;
+	int	precision_set;
+}		t_format_flags;
 
 #endif

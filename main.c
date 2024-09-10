@@ -1,4 +1,53 @@
-int main() {
-    ft_printf("Hello %s! I have %d apples and %c oranges.\n", "world", 5, 'A');
-    return 0;
+#include "libftprintf.h"
+#include <stdio.h>
+
+int	main(void)
+{
+
+	printf("%d\n", ft_printf("Hello %s! I have %d apples and %c oranges.\n", "\0", INT_MAX, 'A'));
+	fflush(stdout);
+	printf("%d\n", printf("Hello %s! I have %d apples and %c oranges.\n",	"\0", INT_MAX, 'A'));
+	fflush(stdout);
+
+	//int num = 42;
+	int *p = NULL;
+	printf("%d\n", ft_printf("ft_printf The address of num: %p\n", (void *)p));
+	fflush(stdout);
+	printf("%d\n",printf("printf The address of num: %p\n", (void *)p));
+	fflush(stdout);
+
+	printf("%d\n", ft_printf("ft_printf udecimal: %u\n", 76589));
+	fflush(stdout);
+	printf("%d\n", printf("___printf udecimal: %u\n", 76589));
+	fflush(stdout);
+	//printf("ft_printf udecimal return value %d\n", ft_printf("%u\n", -76589));
+	//printf("printf udecimal return value %d\n", printf("%u\n", -76589));
+/*
+	ft_printf("ft_printf hex: %x\n", 0x01ABCDEF);
+	printf("printf hex: %x\n", 0x01ABCDEF);
+	printf("ft_printf hex return value %d\n", ft_printf("%x\n", 0x01ABCDEF));
+	printf("printf hex return value %d\n", printf("%x\n", 0x01ABCDEF));
+	ft_printf("ft_printf HEX: %X\n", 0x01ABCDEF);
+	printf("printf HEX: %X\n", 0x01ABCDEF);
+	printf("ft_printf HEX return value %d\n", ft_printf("%X\n", 0x01ABCDEF));
+	printf("printf HEX return value %d\n", printf("%X\n", 0x01ABCDEF));
+	ft_printf("%%\n");
+	printf("%%\n");
+	printf("ft_printf %% return value %d\n", ft_printf("%%\n"));
+	printf("printf %% return value %d\n", printf("%%\n"));
+	*/
+	return (0);
 }
+
+/*
+int	main(void)
+{
+	int	num;
+	int	*p;
+
+	num = 42;
+	p = &num;
+	ft_printf("The address of num: %p\n", (void *)p);
+	return (0);
+}
+*/

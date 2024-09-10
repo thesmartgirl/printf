@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_hex_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,28 +9,21 @@
 /*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libftprintf.h"
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+int	ft_putnbr_hex_fd(uintptr_t nbr, bool caps, int fd)
+{
+	char	*hex_digits;
+	int		len;
 
-#include "../libft/libft.h"
-#include <stdarg.h>
-#include <stdbool.h>
-#include <stdint.h>
-
-typedef int	(*t_format_func)(va_list *args);
-
-int			ft_handle_char(va_list *args);
-int			ft_handle_integer(va_list *args);
-int			ft_handle_string(va_list *args);
-int			ft_handle_pointer(va_list *args);
-int     ft_handle_udecimal(va_list *args);
-int     ft_handle_hex(va_list *args);
-int     ft_handle_hex_caps(va_list *args);
-int     ft_handle_percentage(va_list *args);
-int			ft_printf(const char *fmt, ...);
-int     ft_putnbr_hex_fd(uintptr_t nbr, bool caps, int fd);
-char		*ft_uitoa(unsigned int n);
-
-
-#endif
+	if (caps)
+		hex_digits = "0123456789ABCDEF";
+	else
+		hex_digits = "0123456789abcdef";
+	len = 0;
+	if (nbr >= 16)
+		len += ft_putnbr_hex_fd(nbr / 16, caps, fd);
+	ft_putchar_fd(hex_digits[nbr % 16], 1);
+	len++;
+	return (len);
+}
