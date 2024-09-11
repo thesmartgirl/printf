@@ -14,10 +14,13 @@
 int	ft_handle_integer(va_list *args)
 {
 	int		i;
+	int		len;
 	char	*s;
 
 	i = va_arg(*args, int);
 	s = ft_itoa(i);
 	ft_putstr_fd(s, 1);
-	return (ft_strlen(s));
+	len = ft_strlen(s);
+	free(s);
+	return (len);
 }

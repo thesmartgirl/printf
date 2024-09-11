@@ -15,9 +15,12 @@ int	ft_handle_udecimal(va_list *args)
 {
 	unsigned int	u;
 	char			*s;
+	int		len;
 
 	u = va_arg(*args, unsigned int);
 	s = ft_uitoa(u);
 	ft_putstr_fd(s, 1);
-	return (ft_strlen(s));
+	len = ft_strlen(s);
+	free(s);
+	return (len);
 }
