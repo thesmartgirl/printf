@@ -8,16 +8,16 @@ int	main(void)
 	//ft_printf(" NULL %s NULL ", NULL);
 	//printf("%d", printf(" NULL %s NULL ", NULL));
 
-	//printf("%d\n", ft_printf("Hello %s! I have %d apples and %c oranges.\n",
-		//	"\0", INT_MAX, 'A'));
-	//fflush(stdout);
-	//printf("%d\n", printf("Hello %s! I have %d apples and %c oranges.\n", "\0",
-	//		INT_MAX, 'A'));
-	//fflush(stdout);
+	printf("%d\n", ft_printf("Hello %s! I have %d apples and %c oranges.\n",
+		"\0", INT_MAX, 'A'));
+	fflush(stdout);
+	printf("%d\n", printf("Hello %s! I have %d apples and %c oranges.\n", "\0",
+			INT_MAX, 'A'));
+	fflush(stdout);
 	//int num = 42;
 	//p = &num;
-	printf("%d\n", ft_printf(" %p %p ", 0, 0));
-	printf("%d\n", printf(" %p %p ", 0, 0));
+	//printf("%d\n", ft_printf(" %p %p ", 0, 0));
+	//printf("%d\n", printf(" %p %p ", 0, 0));
 
 	//printf("%d\n", printf(" %p ", -1));
 	//printf("%d\n", printf("printf The address of num: %p\n", (void *)p));
