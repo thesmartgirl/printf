@@ -7,16 +7,16 @@ SRC = ft_printf.c ft_handle_integer.c ft_handle_string.c ft_handle_char.c \
 			 ft_handle_udecimal.c	ft_handle_percentage.c ft_putnbr_hex_fd.c \
 			 ft_uitoa.c
 OBJ = $(SRC:.c=.o)
+LIBFT_DIR = ../libft
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_OBJ = $(LIBFT_DIR)/*.o
+
 
 # Compile the object files and create the library
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(AR) $(NAME) $(OBJ)
-
-# Compile object files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(OBJ) $(LIBFT_OBJ)
+	$(AR) $(NAME) $(OBJ) $(LIBFT_OBJ)
 
 # Clean object files
 clean:
@@ -28,3 +28,5 @@ fclean: clean
 
 # Rebuild everything
 re: fclean all
+
+.PHONY: all re clean fclean

@@ -16,6 +16,11 @@ int	ft_handle_string(va_list *args)
 	char	*s;
 
 	s = va_arg(*args, char *);
+	if (s == NULL)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
 	ft_putstr_fd(s, 1);
 	return (ft_strlen(s));
 }

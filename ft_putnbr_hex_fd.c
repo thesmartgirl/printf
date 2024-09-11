@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "libftprintf.h"
 
-int	ft_putnbr_hex_fd(uintptr_t nbr, bool caps, int fd)
+int	ft_putnbr_hex_fd(unsigned long nbr, bool caps, int fd)
 {
 	char	*hex_digits;
 	int		len;
