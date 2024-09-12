@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_BONUS_H
-# define FT_FTPRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
 # include "./libft/libft.h"
 # include <stdarg.h>

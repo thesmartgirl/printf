@@ -4,7 +4,7 @@
 
 int	main(void)
 {
-	ft_printf("start%+- #0200.7899d\n", 123);
+	ft_printf("start %+-#0 1.80d end\n", 123);
 	//int	*p;
 	//ft_printf(" NULL %s NULL ", NULL);
 	//printf("%d", printf(" NULL %s NULL ", NULL));
