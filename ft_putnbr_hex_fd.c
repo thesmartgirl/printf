@@ -9,9 +9,9 @@
 /*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-int	ft_putnbr_hex_fd(unsigned long nbr, bool caps, int fd)
+int	ft_putnbr_hex_fd(unsigned long nbr, int caps, int fd)
 {
 	char	*hex_digits;
 	int		len;

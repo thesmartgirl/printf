@@ -13,10 +13,8 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "./../libft/libft.h"
+# include "./libft/libft.h"
 # include <stdarg.h>
-# include <stdbool.h>
-# include <stdint.h>
 
 typedef int	(*t_format_func)(va_list *args);
 
@@ -29,7 +27,7 @@ int			ft_handle_hex(va_list *args);
 int			ft_handle_hex_caps(va_list *args);
 int			ft_handle_percentage(va_list *args);
 int			ft_printf(const char *fmt, ...);
-int			ft_putnbr_hex_fd(unsigned long nbr, bool caps, int fd);
+int			ft_putnbr_hex_fd(unsigned long nbr, int caps, int fd);
 char		*ft_uitoa(unsigned int n);
 
 #endif

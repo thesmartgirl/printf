@@ -1,19 +1,22 @@
-#include "libftprintf.h"
+#include "ft_printf_bonus.h"
 #include <limits.h>
 #include <stdio.h>
 
 int	main(void)
 {
+	ft_printf("start%+- #0200.7899d\n", 123);
 	//int	*p;
 	//ft_printf(" NULL %s NULL ", NULL);
 	//printf("%d", printf(" NULL %s NULL ", NULL));
 
-	printf("%d\n", ft_printf("Hello %s! I have %d apples and %c oranges.\n",
-		"\0", INT_MAX, 'A'));
+	/*printf("%d\n", ft_printf("Hello! I have % u apples and %s oranges.\n",6789, "five"));
 	fflush(stdout);
-	printf("%d\n", printf("Hello %s! I have %d apples and %c oranges.\n", "\0",
-			INT_MAX, 'A'));
+	printf("%d\n", printf("Hello! I have %#u apples and %s oranges.\n",	6789, "five"));
 	fflush(stdout);
+	printf("ft_printf hex return value %d\n", ft_printf("%#X\n", 109878724));
+	fflush(stdout);
+	printf("printf hex return value %d\n", printf("%#X\n", 109878724));
+	fflush(stdout);*/
 	//int num = 42;
 	//p = &num;
 	//printf("%d\n", ft_printf(" %p %p ", 0, 0));
@@ -31,9 +34,7 @@ int	main(void)
 	// printf("printf udecimal return (value %d\n", printf("%u\n", -76589)));
 	/*	ft_printf("ft_printf hex: %x\n", 0x01ABCDEF);
 		printf("printf hex: %x\n", 0x01ABCDEF);
-		printf("ft_printf hex return (value %d\n", ft_printf("%x\n",
-				0x01ABCDEF)));
-		printf("printf hex return (value %d\n", printf("%x\n", 0x01ABCDEF)));
+
 		ft_printf("ft_printf HEX: %X\n", 0x01ABCDEF);
 		printf("printf HEX: %X\n", 0x01ABCDEF);
 		printf("ft_printf HEX return (value %d\n", ft_printf("%X\n",

@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_integer.c                                :+:      :+:    :+:   */
+/*   ft_handle_hex_caps_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:14:33 by ataan             #+#    #+#             */
-/*   Updated: 2024/09/11 16:50:46 by ataan            ###   ########.fr       */
+/*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-int	ft_handle_integer_flags(va_list *args, format_flags *flags)
+int	ft_handle_hex_caps(va_list *args, t_format_flags *flags)
 {
-	int		i;
-	int		len;
-	char	*s;
+	unsigned int	u;
 
-	i = va_arg(*args, int);
-	s = ft_itoa(i);
-	len = 0;
-	if(flags->flag_plus && i > 0)
+	u = va_arg(*args, unsigned int);
+	if (flags->flag_hash == 1)
 	{
-		ft_putchar_fd('+', 1);
-		len = 1;
+		ft_putstr_fd("0X", 1);
+		return (ft_putnbr_hex_fd((uintptr_t)u, 1, 1) + 2);
 	}
-	if(flags->flag_space && i > 0)
-	{
-		ft_putchar_fd(' ', 1);
-		len = 1;
-	}
-	ft_putstr_fd(s, 1);
-	len += ft_strlen(s);
-	free(s);
-	return (len);
+	else
+		return (ft_putnbr_hex_fd((uintptr_t)u, 1, 1));
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_string.c                                    :+:      :+:    :+:   */
+/*   ft_handle_hex_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -9,18 +9,18 @@
 /*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-int	ft_handle_string(va_list *args)
+int	ft_handle_hex(va_list *args, t_format_flags *flags)
 {
-	char	*s;
+	unsigned int	u;
 
-	s = va_arg(*args, char *);
-	if (s == NULL)
+	u = va_arg(*args, unsigned int);
+	if (flags->flag_hash == 1)
 	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
+		ft_putstr_fd("0x", 1);
+		return (ft_putnbr_hex_fd((uintptr_t)u, 0, 1) + 2);
 	}
-	ft_putstr_fd(s, 1);
-	return (ft_strlen(s));
+	else
+		return (ft_putnbr_hex_fd((uintptr_t)u, 0, 1));
 }

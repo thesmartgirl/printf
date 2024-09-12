@@ -9,7 +9,7 @@
 /*   Updated: 2024/09/11 16:49:03 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_handle_pointer(va_list *args)
 {
