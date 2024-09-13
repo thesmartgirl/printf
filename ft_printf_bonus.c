@@ -47,7 +47,7 @@ int	ft_printf(const char *fmt, ...)
 		{
 			fmt++;
 			ft_parse_flags(&fmt, &flags);
-			/*/PLZ REMOVE ME
+			//PLZ REMOVE ME
 			printf("flag_plus=%d\n", flags.flag_plus);
 			printf("flag_space=%d\n", flags.flag_space);
 			printf("flag_hash=%d\n", flags.flag_hash);
@@ -55,7 +55,8 @@ int	ft_printf(const char *fmt, ...)
 			printf("flag_minus=%d\n", flags.flag_minus);
 			printf("precision_set=%d\n", flags.precision_set);
 			printf("precision=%d\n", flags.precision);
-			printf("field_width=%d\n", flags.field_width);*/
+			printf("field_width=%d\n", flags.field_width);
+			//
 			if (format_handlers[(int)*(fmt)])
 			{
 				handler = format_handlers[(int)*fmt];

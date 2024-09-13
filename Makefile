@@ -25,7 +25,6 @@ $(NAME): $(OBJ)
 	$(MAKE) bonus -C $(LIBFT_DIR)
 	cp $(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJ)
-	rm -f $(LIBFT)
 
 $(LIBFT):
 	$(MAKE) bonus $(LIBFT_DIR)
@@ -34,7 +33,6 @@ bonus: $(OBJ_BONUS)
 	$(MAKE) bonus -C $(LIBFT_DIR)
 	cp $(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJ_BONUS)
-	rm -f $(LIBFT)
 
 clean:
 	rm -f $(OBJ) $(OBJ_BONUS)

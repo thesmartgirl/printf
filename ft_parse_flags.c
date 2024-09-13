@@ -51,11 +51,9 @@ static void	ft_set_precision(const char **format, t_format_flags *flags)
 	*format = p;
 }
 
-void	ft_parse_flags(const char **format, t_format_flags *flags)
+static void	ft_set_flags(const char **format, t_format_flags *flags)
 {
 	const char	*p = *format;
-
-	ft_initialize_flags(flags);
 	while (*p == '#' || *p == '0' || *p == '-' || *p == '+' || *p == ' ')
 	{
 		if (*p == '#')
@@ -70,6 +68,15 @@ void	ft_parse_flags(const char **format, t_format_flags *flags)
 			flags->flag_space = 1;
 		p++;
 	}
+	*format = p;
+}
+
+void	ft_parse_flags(const char **format, t_format_flags *flags)
+{
+	const char	*p = *format;
+
+	ft_initialize_flags(flags);
+	ft_set_flags(&p, flags);
 	ft_field_width(&p, flags);
 	ft_set_precision(&p, flags);
 	*format = p;
