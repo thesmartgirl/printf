@@ -54,6 +54,7 @@ static void	ft_set_precision(const char **format, t_format_flags *flags)
 static void	ft_set_flags(const char **format, t_format_flags *flags)
 {
 	const char	*p = *format;
+
 	while (*p == '#' || *p == '0' || *p == '-' || *p == '+' || *p == ' ')
 	{
 		if (*p == '#')

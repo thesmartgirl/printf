@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_integer_bonus.c                                :+:      :+:    :+:   */
+/*   handle_string_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:14:33 by ataan             #+#    #+#             */
-/*   Updated: 2024/09/11 16:50:46 by ataan            ###   ########.fr       */
+/*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
-int	ft_handle_integer(va_list *args, t_format_flags *flags)
+int	ft_handle_string(va_list *args)
 {
-	int		i;
-	int		len;
 	char	*s;
 
-	i = va_arg(*args, int);
-	s = ft_itoa(i);
-	len = 0;
-	if (flags->flag_plus && i > 0)
+	s = va_arg(*args, char *);
+	if (s == NULL)
 	{
-		ft_putchar_fd('+', 1);
-		len = 1;
+		ft_putstr_fd("(null)", 1);
+		return (6);
 	}
-	else if (flags->flag_space && i > 0)
-	{
-		ft_putchar_fd(' ', 1);
-		len = 1;
-	}
-	len += ft_strlen(s);
 	ft_putstr_fd(s, 1);
-	free(s);
-	return (len);
+	return (ft_strlen(s));
 }

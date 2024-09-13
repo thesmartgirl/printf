@@ -25,43 +25,28 @@ static t_format_func	*init_format_handlers(void)
 		format_handlers['u'] = ft_handle_udecimal;
 		format_handlers['x'] = ft_handle_hex;
 		format_handlers['X'] = ft_handle_hex_caps;
-	  format_handlers['%'] = ft_handle_percentage;
+		format_handlers['%'] = ft_handle_percentage;
 	}
 	return (format_handlers);
 }
 
-int	ft_printf(const char *fmt, ...)
+static int ft_parse_and_print(va_list args, const char *fmt,
+	t_format_func *format_handlers)
 {
 	int				ret;
-	va_list			args;
-	t_format_func	*format_handlers;
-	t_format_func	handler;
 	t_format_flags	flags;
+	t_format_func	handler;
 
-	va_start(args, fmt);
-	format_handlers = init_format_handlers();
 	ret = 0;
+	ft_bzero(&flags, sizeof(t_format_flags));
 	while (*fmt)
 	{
 		if (*fmt == '%')
 		{
 			fmt++;
 			ft_parse_flags(&fmt, &flags);
-			//PLZ REMOVE ME
-			printf("flag_plus=%d\n", flags.flag_plus);
-			printf("flag_space=%d\n", flags.flag_space);
-			printf("flag_hash=%d\n", flags.flag_hash);
-			printf("flag_zero=%d\n", flags.flag_zero);
-			printf("flag_minus=%d\n", flags.flag_minus);
-			printf("precision_set=%d\n", flags.precision_set);
-			printf("precision=%d\n", flags.precision);
-			printf("field_width=%d\n", flags.field_width);
-			//
-			if (format_handlers[(int)*(fmt)])
-			{
-				handler = format_handlers[(int)*fmt];
-				ret += handler(&args, &flags);
-			}
+			handler = format_handlers[(int)*fmt];
+			ret += handler(&args, &flags);
 		}
 		else
 		{
@@ -70,6 +55,18 @@ int	ft_printf(const char *fmt, ...)
 		}
 		fmt++;
 	}
+	return ret;
+}
+
+int	ft_printf(const char *fmt, ...)
+{
+	int				ret;
+	va_list			args;
+	t_format_func	*format_handlers;
+
+	va_start(args, fmt);
+	format_handlers = init_format_handlers();
+	ret = ft_parse_and_print(args, fmt, format_handlers);
 	va_end(args);
 	return (ret);
 }

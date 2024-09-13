@@ -4,8 +4,10 @@
 
 int	main(void)
 {
-	ft_printf("start %+-#0 100.80d end\n", 123);
-	//int	*p;
+	printf("%d\n", printf("|%9.9d|\n", 123));
+	printf("%lld\n", ft_strlen(ft_itoa(INT_MIN)) - (INT_MIN < 0) );
+//	printf("%d\n", printf("|%10.3s|\n", "Hello"));
+		//int	*p;
 	//ft_printf(" NULL %s NULL ", NULL);
 	//printf("%d", printf(" NULL %s NULL ", NULL));
 
