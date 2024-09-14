@@ -1,11 +1,14 @@
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
+#include "./libft/libft.h"
 #include <limits.h>
 #include <stdio.h>
 
 int	main(void)
 {
-	printf("%d\n", printf("|%9.9d|\n", 123));
-	printf("%lld\n", ft_strlen(ft_itoa(INT_MIN)) - (INT_MIN < 0) );
+	printf("%d\n", ft_printf("|%1.9d|\n", -1234567890));
+	printf("%d\n", printf("|%1.9d|\n", -1234567890));
+
+//	printf("%lld\n", ft_strlen(ft_itoa(INT_MIN)) - (INT_MIN < 0) );
 //	printf("%d\n", printf("|%10.3s|\n", "Hello"));
 		//int	*p;
 	//ft_printf(" NULL %s NULL ", NULL);
