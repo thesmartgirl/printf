@@ -29,6 +29,17 @@ typedef struct s_format_flags
 	int	precision_set;
 }		t_format_flags;
 
+typedef struct s_to_print
+{
+	int	digits;
+	int	zeros;
+	int	pads;
+	int	tot_len;
+	char *s;
+	char	prefix;
+	char cpad;
+}		t_to_print;
+
 typedef int	(*t_format_func)(va_list *args, t_format_flags *flags);
 
 int			ft_handle_char(va_list *args, t_format_flags *flags);

@@ -20,7 +20,7 @@ static t_format_func	*init_format_handlers(void)
 		format_handlers['d'] = ft_handle_integer;
 		format_handlers['c'] = ft_handle_char;
 		format_handlers['s'] = ft_handle_string;
-		//format_handlers['p'] = ft_handle_pointer;
+		// format_handlers['p'] = ft_handle_pointer;
 		format_handlers['i'] = ft_handle_integer;
 		format_handlers['u'] = ft_handle_udecimal;
 		format_handlers['x'] = ft_handle_hex;
@@ -30,8 +30,8 @@ static t_format_func	*init_format_handlers(void)
 	return (format_handlers);
 }
 
-static int ft_parse_and_print(va_list args, const char *fmt,
-	t_format_func *format_handlers)
+static int	ft_parse_and_print(va_list args, const char *fmt,
+		t_format_func *format_handlers)
 {
 	int				ret;
 	t_format_flags	flags;
@@ -46,7 +46,8 @@ static int ft_parse_and_print(va_list args, const char *fmt,
 			fmt++;
 			ft_parse_flags(&fmt, &flags);
 			handler = format_handlers[(int)*fmt];
-			ret += handler(&args, &flags);
+			if (handler)
+				ret += handler(&args, &flags);
 		}
 		else
 		{
@@ -55,7 +56,7 @@ static int ft_parse_and_print(va_list args, const char *fmt,
 		}
 		fmt++;
 	}
-	return ret;
+	return (ret);
 }
 
 int	ft_printf(const char *fmt, ...)

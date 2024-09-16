@@ -5,8 +5,8 @@
 
 int	main(void)
 {
-	printf("%d\n", ft_printf("|%1.9d|\n", -1234567890));
-	printf("%d\n", printf("|%1.9d|\n", -1234567890));
+	printf("%d\n", ft_printf("|%0-15.2d|\n", 3456));
+	printf("%d\n", printf("|%0-15.2d|\n", 3456));
 
 //	printf("%lld\n", ft_strlen(ft_itoa(INT_MIN)) - (INT_MIN < 0) );
 //	printf("%d\n", printf("|%10.3s|\n", "Hello"));
