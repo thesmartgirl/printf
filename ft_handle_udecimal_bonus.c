@@ -14,9 +14,9 @@
 static void	ft_calc_content(const unsigned int u, t_format_flags *flags,
 	t_to_print *nbr_print)
 {
+	nbr_print->s = ft_itoa(u);
 	if (u == 0 && flags->precision_set == 1 && flags->precision == 0)
 		nbr_print->s = ft_strdup("");
-	nbr_print->s = ft_itoa(u);
 	nbr_print->digits = ft_strlen(nbr_print->s);
 	if (flags->flag_zero && !(flags->flag_minus) && flags->precision_set == 0)
 		nbr_print->cpad = '0';
