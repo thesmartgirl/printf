@@ -41,8 +41,7 @@ static void	ft_set_precision(const char **format, t_format_flags *flags)
 	if (*p == '.')
 	{
 		p++;
-		if (ft_isdigit(*p))
-			flags->precision_set = 1;
+		flags->precision_set = 1;
 		while (ft_isdigit(*p))
 			p++;
 		if (ft_substr(*format, 1, p - *format - 1))

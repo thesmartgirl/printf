@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uitoa.c                                         :+:      :+:    :+:   */
+/*   ft_hextoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static size_t	ft_numlen(unsigned int n)
 {
 	size_t	len;
 
 	len = 1;
-	while (n >= 10)
+	while (n >= 16)
 	{
-		n /= 10;
+		n /= 16;
 		len++;
 	}
 	return (len);
 }
 
-char	*ft_uitoa(unsigned int n)
+char	*ft_hextoa(unsigned int n, int caps)
 {
 	char	*str;
 	size_t	len;
@@ -39,8 +39,8 @@ char	*ft_uitoa(unsigned int n)
 	str[len] = '\0';
 	while (len--)
 	{
-		str[len] = (n % 10) + '0';
-		n /= 10;
+		str[len] = "0123456789abcdef0123456789ABCDEF"[(n % 16) + (caps * 16)];
+		n /= 16;
 	}
 	return (str);
 }

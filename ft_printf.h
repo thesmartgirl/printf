@@ -6,7 +6,7 @@
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:14:33 by ataan             #+#    #+#             */
-/*   Updated: 2024/09/11 16:48:30 by ataan            ###   ########.fr       */
+/*   Updated: 2024/09/17 11:43:10 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "./libft/libft.h"
 # include <stdarg.h>
+# include <stdint.h>
 
 typedef int	(*t_format_func)(va_list *args);
 

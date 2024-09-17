@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:14:33 by ataan             #+#    #+#             */
-/*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
+/*   Updated: 2024/09/17 11:41:12 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf_bonus.h"
@@ -20,7 +20,7 @@ static t_format_func	*init_format_handlers(void)
 		format_handlers['d'] = ft_handle_integer;
 		format_handlers['c'] = ft_handle_char;
 		format_handlers['s'] = ft_handle_string;
-		// format_handlers['p'] = ft_handle_pointer;
+		format_handlers['p'] = ft_handle_pointer;
 		format_handlers['i'] = ft_handle_integer;
 		format_handlers['u'] = ft_handle_udecimal;
 		format_handlers['x'] = ft_handle_hex;
@@ -30,7 +30,7 @@ static t_format_func	*init_format_handlers(void)
 	return (format_handlers);
 }
 
-static int	ft_parse_and_print(va_list args, const char *fmt,
+static int	ft_parse_and_print(va_list *args, const char *fmt,
 		t_format_func *format_handlers)
 {
 	int				ret;
@@ -47,7 +47,7 @@ static int	ft_parse_and_print(va_list args, const char *fmt,
 			ft_parse_flags(&fmt, &flags);
 			handler = format_handlers[(int)*fmt];
 			if (handler)
-				ret += handler(&args, &flags);
+				ret += handler(args, &flags);
 		}
 		else
 		{
@@ -67,7 +67,7 @@ int	ft_printf(const char *fmt, ...)
 
 	va_start(args, fmt);
 	format_handlers = init_format_handlers();
-	ret = ft_parse_and_print(args, fmt, format_handlers);
+	ret = ft_parse_and_print(&args, fmt, format_handlers);
 	va_end(args);
 	return (ret);
 }
