@@ -26,27 +26,35 @@ static void	ft_initialize_flags(t_format_flags *flags)
 static void	ft_field_width(const char **format, t_format_flags *flags)
 {
 	const char	*p = *format;
+	char	*str_field_width;
 
 	while (ft_isdigit(*p))
 		p++;
-	if (ft_substr(*format, 0, p - *format))
-		flags->field_width = ft_atoi(ft_substr(*format, 0, p - *format));
+	str_field_width = NULL;
+	str_field_width = ft_substr(*format, 0, p - *format);
+	if (str_field_width)
+		flags->field_width = ft_atoi(str_field_width);
 	*format = p;
+	free(str_field_width);
 }
 
 static void	ft_set_precision(const char **format, t_format_flags *flags)
 {
 	const char	*p = *format;
-
+	char	*str_precision;
+	
+	str_precision=NULL;
 	if (*p == '.')
 	{
 		p++;
 		flags->precision_set = 1;
 		while (ft_isdigit(*p))
 			p++;
-		if (ft_substr(*format, 1, p - *format - 1))
-			flags->precision = ft_atoi(ft_substr(*format, 1, p - *format - 1));
+		str_precision = ft_substr(*format, 1, p - *format - 1);
+		if (str_precision)
+			flags->precision = ft_atoi(str_precision);
 	}
+	free(str_precision);
 	*format = p;
 }
 
