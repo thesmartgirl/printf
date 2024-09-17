@@ -53,8 +53,13 @@ int			ft_handle_hex(va_list *args, t_format_flags *flags);
 int			ft_handle_hex_caps(va_list *args, t_format_flags *flags);
 int			ft_putnbr_hex_fd(unsigned long nbr, int caps, int fd);
 int			ft_handle_percentage(va_list *args, t_format_flags *flags);
+int			ft_print_left_adj(t_to_print *nbr_print);
+int			ft_print_right_adj(t_to_print *nbr_print);
 char		*ft_uitoa(unsigned int n);
 char		*ft_hextoa(unsigned int n, int caps);
 void		ft_parse_flags(const char **fmt, t_format_flags *flags);
+void		ft_calc_content(const unsigned long u, t_format_flags *flags,
+	int caps, t_to_print *nbr_print);
+void		ft_calc_len(t_format_flags *flags, t_to_print *nbr_print);
 
 #endif

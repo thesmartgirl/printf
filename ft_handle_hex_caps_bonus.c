@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf_bonus.h"
-
+/*
 static int	ft_print_left_adj(t_to_print *nbr_print)
 {
 	if (nbr_print->prefix[0] != 'a')
@@ -45,7 +45,8 @@ static int	ft_print_right_adj(t_to_print *nbr_print)
 	return (nbr_print->tot_len);
 }
 
-static void	ft_calc_content(const unsigned long u, t_format_flags *flags, t_to_print *nbr_print)
+static void	ft_calc_content(const unsigned long u, t_format_flags *flags,
+	t_to_print *nbr_print)
 {
 	nbr_print->prefix = "a";
 	if (flags->flag_hash == 1)
@@ -61,7 +62,6 @@ static void	ft_calc_content(const unsigned long u, t_format_flags *flags, t_to_p
 		nbr_print->cpad = '0';
 	else
 		nbr_print->cpad = ' ';
-
 }
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
@@ -81,14 +81,14 @@ static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 	nbr_print->pads = nbr_print->tot_len - 2*(nbr_print->prefix[0] != 'a')
 		- nbr_print->zeros - nbr_print->digits;
 }
-
+*/
 int	ft_handle_hex_caps(va_list *args, t_format_flags *flags)
 {
 	unsigned long	u;
 	t_to_print	nbr_print;
 
 	u = va_arg(*args, unsigned long);
-	ft_calc_content(u, flags, &nbr_print);
+	ft_calc_content(u, flags, 1, &nbr_print);
 	ft_calc_len(flags, &nbr_print);
 	if (flags->flag_minus)
 		return (ft_print_left_adj(&nbr_print));

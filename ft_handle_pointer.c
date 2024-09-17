@@ -13,9 +13,9 @@
 
 int	ft_handle_pointer(va_list *args)
 {
-	unsigned long	ptr;
+	uintptr_t ptr;
 
-	ptr = (unsigned long)va_arg(*args, void *);
+	ptr = (uintptr_t)va_arg(*args, void *);
 	if (ptr != 0)
 	{
 		ft_putstr_fd("0x", 1);
