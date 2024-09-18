@@ -13,7 +13,7 @@
 
 int	ft_handle_pointer(va_list *args)
 {
-	uintptr_t ptr;
+	uintptr_t	ptr;
 
 	ptr = (uintptr_t)va_arg(*args, void *);
 	if (ptr != 0)

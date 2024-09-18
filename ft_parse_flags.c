@@ -26,7 +26,7 @@ static void	ft_initialize_flags(t_format_flags *flags)
 static void	ft_field_width(const char **format, t_format_flags *flags)
 {
 	const char	*p = *format;
-	char	*str_field_width;
+	char		*str_field_width;
 
 	while (ft_isdigit(*p))
 		p++;
@@ -41,9 +41,9 @@ static void	ft_field_width(const char **format, t_format_flags *flags)
 static void	ft_set_precision(const char **format, t_format_flags *flags)
 {
 	const char	*p = *format;
-	char	*str_precision;
-	
-	str_precision=NULL;
+	char		*str_precision;
+
+	str_precision = NULL;
 	if (*p == '.')
 	{
 		p++;

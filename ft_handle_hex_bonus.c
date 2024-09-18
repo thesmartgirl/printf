@@ -13,7 +13,7 @@
 #include "ft_printf_bonus.h"
 
 void	ft_calc_content_hex(const unsigned long u, t_format_flags *flags,
-	int caps, t_to_print *nbr_print)
+		int caps, t_to_print *nbr_print)
 {
 	nbr_print->prefix = "a";
 	if (flags->flag_hash == 1)
@@ -23,13 +23,13 @@ void	ft_calc_content_hex(const unsigned long u, t_format_flags *flags,
 		nbr_print->s = ft_strdup("");
 		nbr_print->prefix = "a";
 	}
-	else nbr_print->s = ft_hextoa(u, caps);
+	else
+		nbr_print->s = ft_hextoa(u, caps);
 	nbr_print->digits = ft_strlen(nbr_print->s);
 	if (flags->flag_zero && !(flags->flag_minus) && flags->precision_set == 0)
 		nbr_print->cpad = '0';
 	else
 		nbr_print->cpad = ' ';
-
 }
 
 void	ft_calc_len_hex(t_format_flags *flags, t_to_print *nbr_print)
@@ -37,23 +37,26 @@ void	ft_calc_len_hex(t_format_flags *flags, t_to_print *nbr_print)
 	nbr_print->tot_len = flags->field_width;
 	if (flags->precision > nbr_print->digits)
 	{
-		if (nbr_print->tot_len < flags->precision + 2*(nbr_print->prefix[0] != 'a'))
-			nbr_print->tot_len = flags->precision + 2*(nbr_print->prefix[0] != 'a');
+		if (nbr_print->tot_len < flags->precision + 2
+			* (nbr_print->prefix[0] != 'a'))
+			nbr_print->tot_len = flags->precision + 2
+				* (nbr_print->prefix[0] != 'a');
 	}
 	else if (nbr_print->tot_len < nbr_print->digits
 		+ (nbr_print->prefix[0] != 'a'))
-		nbr_print->tot_len = nbr_print->digits + 2*(nbr_print->prefix[0] != 'a');
+		nbr_print->tot_len = nbr_print->digits + 2
+			* (nbr_print->prefix[0] != 'a');
 	nbr_print->zeros = 0;
 	if (flags->precision > nbr_print->digits)
 		nbr_print->zeros = flags->precision - nbr_print->digits;
-	nbr_print->pads = nbr_print->tot_len - 2*(nbr_print->prefix[0] != 'a')
+	nbr_print->pads = nbr_print->tot_len - 2 * (nbr_print->prefix[0] != 'a')
 		- nbr_print->zeros - nbr_print->digits;
 }
 
 int	ft_handle_hex(va_list *args, t_format_flags *flags)
 {
 	unsigned long	u;
-	t_to_print	nbr_print;
+	t_to_print		nbr_print;
 
 	u = va_arg(*args, unsigned long);
 	ft_calc_content_hex(u, flags, 0, &nbr_print);

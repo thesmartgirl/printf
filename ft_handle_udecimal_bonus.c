@@ -12,7 +12,7 @@
 #include "ft_printf_bonus.h"
 
 static void	ft_calc_content(const unsigned int u, t_format_flags *flags,
-	t_to_print *nbr_print)
+		t_to_print *nbr_print)
 {
 	nbr_print->s = ft_uitoa(u);
 	if (u == 0 && flags->precision_set == 1 && flags->precision == 0)
@@ -30,8 +30,10 @@ static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 	nbr_print->tot_len = flags->field_width;
 	if (flags->precision > nbr_print->digits)
 	{
-		if (nbr_print->tot_len < flags->precision + (nbr_print->prefix[0] != 'a'))
-			nbr_print->tot_len = flags->precision + (nbr_print->prefix[0] != 'a');
+		if (nbr_print->tot_len < flags->precision
+			+ (nbr_print->prefix[0] != 'a'))
+			nbr_print->tot_len = flags->precision
+				+ (nbr_print->prefix[0] != 'a');
 	}
 	else if (nbr_print->tot_len < nbr_print->digits
 		+ (nbr_print->prefix[0] != 'a'))
@@ -46,7 +48,7 @@ static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 int	ft_handle_udecimal(va_list *args, t_format_flags *flags)
 {
 	unsigned int	u;
-	t_to_print	nbr_print;
+	t_to_print		nbr_print;
 
 	u = (unsigned int)va_arg(*args, unsigned int);
 	ft_calc_content(u, flags, &nbr_print);

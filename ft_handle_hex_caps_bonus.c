@@ -14,7 +14,7 @@
 int	ft_handle_hex_caps(va_list *args, t_format_flags *flags)
 {
 	unsigned long	u;
-	t_to_print	nbr_print;
+	t_to_print		nbr_print;
 
 	u = va_arg(*args, unsigned long);
 	ft_calc_content_hex(u, flags, 1, &nbr_print);
