@@ -14,7 +14,7 @@
 static void	ft_calc_content(const unsigned int u, t_format_flags *flags,
 	t_to_print *nbr_print)
 {
-	nbr_print->s = ft_itoa(u);
+	nbr_print->s = ft_uitoa(u);
 	if (u == 0 && flags->precision_set == 1 && flags->precision == 0)
 		nbr_print->s = ft_strdup("");
 	nbr_print->digits = ft_strlen(nbr_print->s);
@@ -48,7 +48,7 @@ int	ft_handle_udecimal(va_list *args, t_format_flags *flags)
 	unsigned int	u;
 	t_to_print	nbr_print;
 
-	u = va_arg(*args, unsigned int);
+	u = (unsigned int)va_arg(*args, unsigned int);
 	ft_calc_content(u, flags, &nbr_print);
 	ft_calc_len(flags, &nbr_print);
 	if (flags->flag_minus)
