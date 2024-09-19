@@ -8,7 +8,7 @@ SRC = ft_printf.c ft_handle_integer.c ft_handle_string.c ft_handle_char.c \
 			ft_uitoa.c ft_handle_pointer.c
 SRC_BONUS = ft_printf_bonus.c ft_handle_integer_bonus.c ft_parse_flags.c \
 			ft_handle_hex_bonus.c ft_handle_hex_caps_bonus.c ft_putnbr_hex_fd.c \
-			ft_handle_char.c ft_handle_string_bonus.c ft_handle_udecimal_bonus.c \
+			ft_handle_char_bonus.c ft_handle_string_bonus.c ft_handle_udecimal_bonus.c \
 			ft_uitoa.c ft_handle_percentage.c ft_handle_pointer.c ft_hextoa.c
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
