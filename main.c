@@ -8,9 +8,9 @@ int	main(void)
 //	printf("%d\n", ft_printf("%u\n", 4294967295u));
 //	printf("%d\n", printf("%u\n", 4294967295u));
 
-	printf("%d\n", ft_printf("{%3c}", 0));
+	printf("%d\n", ft_printf("%.7s", "hello"));
 	fflush(stdout);
-	printf("%d\n", printf("{%3c}", 0));
+	printf("%d\n", printf("%.7s", "hello"));
 	fflush(stdout);
 
 	printf("%d\n",ft_printf("%-5c", '\0'));

@@ -15,7 +15,7 @@ static void	ft_calc_content(const char *s, t_format_flags *flags,
 		t_to_print *nbr_print)
 {
 	if(flags->precision_set == 1)
-		nbr_print->s = ft_substr(nbr_print->s, 0, flags->precision);
+		nbr_print->s = ft_substr(s, 0, flags->precision);
 	else
 		nbr_print->s = ft_strdup(s);
 	nbr_print->digits = ft_strlen(nbr_print->s);
