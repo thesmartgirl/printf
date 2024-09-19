@@ -14,10 +14,17 @@
 static void	ft_calc_content(const char *s, t_format_flags *flags,
 		t_to_print *nbr_print)
 {
-	if(flags->precision_set == 1)
-		nbr_print->s = ft_substr(s, 0, flags->precision);
+	if (s == NULL)
+		nbr_print->s = "(null)";
 	else
 		nbr_print->s = ft_strdup(s);
+	if (flags->precision_set)
+	{
+		if (flags->precision == 0)
+			nbr_print->s = ft_strdup("");
+		else
+			nbr_print->s = ft_substr(s, 0, flags->precision);
+	}
 	nbr_print->digits = ft_strlen(nbr_print->s);
 	nbr_print->cpad = ' ';
 	nbr_print->prefix = "a";
@@ -38,11 +45,6 @@ int	ft_handle_string(va_list *args, t_format_flags *flags)
 	t_to_print	nbr_print;
 
 	s = va_arg(*args, char *);
-	if (s == NULL)
-	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
-	}
 	ft_calc_content(s, flags, &nbr_print);
 	ft_calc_len(flags, &nbr_print);
 	if (flags->flag_minus)
