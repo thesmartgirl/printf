@@ -22,7 +22,7 @@ static void	ft_calc_content(const char c, t_to_print *nbr_print)
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 {
-	if(flags->field_width > 0)
+	if (flags->field_width > 0)
 		nbr_print->tot_len = flags->field_width;
 	else
 		nbr_print->tot_len = 1;
@@ -33,8 +33,7 @@ static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 
 int	ft_handle_char(va_list *args, t_format_flags *flags)
 {
-	int	c;
-
+	int			c;
 	t_to_print	nbr_print;
 
 	c = va_arg(*args, int);
