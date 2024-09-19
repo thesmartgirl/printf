@@ -7,12 +7,16 @@ int	main(void)
 {
 //	printf("%d\n", ft_printf("%u\n", 4294967295u));
 //	printf("%d\n", printf("%u\n", 4294967295u));
-	
+
 	printf("%d\n", ft_printf("{%3c}", 0));
+	fflush(stdout);
 	printf("%d\n", printf("{%3c}", 0));
+	fflush(stdout);
 
 	printf("%d\n",ft_printf("%-5c", '\0'));
+	fflush(stdout);
 	printf("%d\n", printf("%-5c", '\0'));
+	fflush(stdout);
 
 //	printf("%lld\n", ft_strlen(ft_itoa(INT_MIN)) - (INT_MIN < 0) );
 //	printf("%d\n", printf("|%10.3s|\n", "Hello"));
