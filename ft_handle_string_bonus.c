@@ -15,7 +15,10 @@ static void	ft_calc_content(const char *s, t_format_flags *flags,
 		t_to_print *nbr_print)
 {
 	if (s == NULL)
+	{
 		nbr_print->s = ft_strdup("(null)");
+		printf("debug null s = %s\n", nbr_print->s );
+	}
 	else
 		nbr_print->s = ft_strdup(s);
 	if (flags->precision_set)
@@ -28,6 +31,9 @@ static void	ft_calc_content(const char *s, t_format_flags *flags,
 	nbr_print->digits = ft_strlen(nbr_print->s);
 	nbr_print->cpad = ' ';
 	nbr_print->prefix = "a";
+	printf("debug s = %s\n", nbr_print->s );
+	printf("debug precision_set = %d\n", flags->precision_set );
+	printf("debug precision = %d\n", flags->precision );
 }
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
