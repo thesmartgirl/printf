@@ -8,11 +8,11 @@ int	main(void)
 //	printf("%d\n", ft_printf("%u\n", 4294967295u));
 //	printf("%d\n", printf("%u\n", 4294967295u));
 
-	printf("%d\n", printf("%-9.1s", NULL));
-	fflush(stdout);
-	printf("%d\n", printf("%-9.1s", NULL));
-	fflush(stdout);
 
+	printf("%d\n", ft_printf("%-9.1s\n", NULL));
+	fflush(stdout);
+	printf("%d\n", printf("%-9.1s\n", NULL));
+	fflush(stdout);
 	printf("%d\n",ft_printf("%-5c", '\0'));
 	fflush(stdout);
 	printf("%d\n", printf("%-5c", '\0'));
