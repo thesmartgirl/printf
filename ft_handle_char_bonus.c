@@ -37,6 +37,7 @@ int	ft_handle_char(va_list *args, t_format_flags *flags)
 	t_to_print	nbr_print;
 
 	c = va_arg(*args, int);
+	ft_bzero(&nbr_print, sizeof(t_to_print));
 	ft_calc_content(c, &nbr_print);
 	ft_calc_len(flags, &nbr_print);
 	if (flags->flag_minus)

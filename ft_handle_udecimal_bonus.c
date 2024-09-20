@@ -51,6 +51,7 @@ int	ft_handle_udecimal(va_list *args, t_format_flags *flags)
 	t_to_print		nbr_print;
 
 	u = (unsigned int)va_arg(*args, unsigned int);
+	ft_bzero(&nbr_print, sizeof(t_to_print));
 	ft_calc_content(u, flags, &nbr_print);
 	ft_calc_len(flags, &nbr_print);
 	if (flags->flag_minus)

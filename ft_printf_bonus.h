@@ -16,7 +16,6 @@
 # include "./libft/libft.h"
 # include <stdarg.h>
 # include <stdint.h>
-# include <stdio.h>
 
 typedef struct s_format_flags
 {
@@ -51,7 +50,6 @@ int			ft_handle_integer(va_list *args, t_format_flags *flags);
 int			ft_printf(const char *fmt, ...);
 int			ft_handle_hex(va_list *args, t_format_flags *flags);
 int			ft_handle_hex_caps(va_list *args, t_format_flags *flags);
-int			ft_putnbr_hex_fd(unsigned long nbr, int caps, int fd);
 int			ft_handle_percentage(va_list *args, t_format_flags *flags);
 int			ft_print_left_adj(t_to_print *nbr_print);
 int			ft_print_right_adj(t_to_print *nbr_print);

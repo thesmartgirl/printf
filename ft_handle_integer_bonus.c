@@ -62,6 +62,7 @@ int	ft_handle_integer(va_list *args, t_format_flags *flags)
 	t_to_print	nbr_print;
 
 	i = va_arg(*args, int);
+	ft_bzero(&nbr_print, sizeof(t_to_print));
 	ft_calc_content(i, flags, &nbr_print);
 	ft_calc_len(flags, &nbr_print);
 	if (flags->flag_minus)
