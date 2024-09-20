@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf_bonus.h"
+
 static void	ft_calc_content_ptr(const uintptr_t ptr, t_format_flags *flags,
-  t_to_print *nbr_print)
+		t_to_print *nbr_print)
 {
-  if (ptr != 0)
-    nbr_print->prefix = "0x";
-  else
-    nbr_print->prefix = "a";
+	if (ptr != 0)
+		nbr_print->prefix = "0x";
+	else
+		nbr_print->prefix = "a";
 	if (ptr == 0)
 		nbr_print->s = ft_strdup("(nil)");
 	else
@@ -31,29 +32,29 @@ static void	ft_calc_content_ptr(const uintptr_t ptr, t_format_flags *flags,
 static void	ft_calc_len_ptr(t_format_flags *flags, t_to_print *nbr_print)
 {
 	nbr_print->tot_len = flags->field_width;
-	if (flags->precision > nbr_print->digits && nbr_print->s[0] != '(')  // Don't apply precision for "(nil)"
+	if (flags->precision > nbr_print->digits && nbr_print->s[0] != '(')
 	{
-		if (nbr_print->tot_len < flags->precision + 2)  // Add 2 for "0x"
+		if (nbr_print->tot_len < flags->precision + 2)
 			nbr_print->tot_len = flags->precision + 2;
 	}
-	else if (nbr_print->tot_len < nbr_print->digits + 2 && nbr_print->s[0] != '(')
+	else if (nbr_print->tot_len < nbr_print->digits + 2
+		&& nbr_print->s[0] != '(')
 		nbr_print->tot_len = nbr_print->digits + 2;
-	else if (nbr_print->tot_len < nbr_print->digits)  // For "(nil)" case
+	else if (nbr_print->tot_len < nbr_print->digits)
 		nbr_print->tot_len = nbr_print->digits;
-
 	nbr_print->zeros = 0;
 	if (flags->precision > nbr_print->digits && nbr_print->s[0] != '(')
 		nbr_print->zeros = flags->precision - nbr_print->digits;
-	nbr_print->pads = nbr_print->tot_len - 2 * (nbr_print->s[0] != '(')  // Only add "0x" for non-"(nil)"
+	nbr_print->pads = nbr_print->tot_len - 2 * (nbr_print->s[0] != '(')
 		- nbr_print->zeros - nbr_print->digits;
 }
 
 int	ft_handle_pointer(va_list *args, t_format_flags *flags)
 {
-  uintptr_t	ptr;
-  t_to_print		nbr_print;
+	uintptr_t	ptr;
+	t_to_print	nbr_print;
 
-  ptr = (uintptr_t)va_arg(*args, void *);
+	ptr = (uintptr_t)va_arg(*args, void *);
 	ft_calc_content_ptr(ptr, flags, &nbr_print);
 	ft_calc_len_ptr(flags, &nbr_print);
 	if (flags->flag_minus)
