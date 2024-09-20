@@ -57,6 +57,7 @@ int			ft_print_left_adj(t_to_print *nbr_print);
 int			ft_print_right_adj(t_to_print *nbr_print);
 char		*ft_uitoa(unsigned int n);
 char		*ft_hextoa(unsigned int n, int caps);
+char		*ft_ptrtoa(uintptr_t ptr);
 void		ft_parse_flags(const char **fmt, t_format_flags *flags);
 void		ft_calc_content_hex(const unsigned long u, t_format_flags *flags,
 				int caps, t_to_print *nbr_print);
