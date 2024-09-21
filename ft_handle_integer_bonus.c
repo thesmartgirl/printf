@@ -27,13 +27,22 @@ static void	ft_calc_content(const int i, t_format_flags *flags,
 		nbr_print->cpad = '0';
 	else
 		nbr_print->cpad = ' ';
-	nbr_print->prefix = "a";
+	nbr_print->prefix = ft_strdup("a");
 	if (i < 0)
-		nbr_print->prefix = "-";
+	{
+		free(nbr_print->prefix);
+		nbr_print->prefix = ft_strdup("-");
+	}
 	else if (flags->flag_plus && i > 0)
-		nbr_print->prefix = "+";
+	{
+		free(nbr_print->prefix);
+		nbr_print->prefix = ft_strdup("+");
+	}
 	else if (flags->flag_space && i > 0)
-		nbr_print->prefix = " ";
+	{
+		free(nbr_print->prefix);
+		nbr_print->prefix = ft_strdup(" ");
+	}
 }
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)

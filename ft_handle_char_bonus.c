@@ -17,7 +17,7 @@ static void	ft_calc_content(const char c, t_to_print *nbr_print)
 	nbr_print->s[0] = c;
 	nbr_print->s[1] = '\0';
 	nbr_print->cpad = ' ';
-	nbr_print->prefix = "a";
+	nbr_print->prefix = ft_strdup("a");
 }
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
