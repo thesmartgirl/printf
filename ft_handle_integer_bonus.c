@@ -17,10 +17,7 @@ static void	ft_calc_content(const int i, t_format_flags *flags,
 	if (i == 0 && flags->precision_set == 1 && flags->precision == 0)
 		nbr_print->s = ft_strdup("");
 	else if (i > 0)
-	{
-		free(nbr_print->s);
 		nbr_print->s = ft_itoa(i);
-	}
 	else if (i == -2147483648)
 		nbr_print->s = ft_strdup("2147483648");
 	else
@@ -30,22 +27,14 @@ static void	ft_calc_content(const int i, t_format_flags *flags,
 		nbr_print->cpad = '0';
 	else
 		nbr_print->cpad = ' ';
-	nbr_print->prefix = ft_strdup("a");
 	if (i < 0)
-	{
-		free(nbr_print->prefix);
 		nbr_print->prefix = ft_strdup("-");
-	}
 	else if (flags->flag_plus && i > 0)
-	{
-		free(nbr_print->prefix);
 		nbr_print->prefix = ft_strdup("+");
-	}
 	else if (flags->flag_space && i > 0)
-	{
-		free(nbr_print->prefix);
 		nbr_print->prefix = ft_strdup(" ");
-	}
+	else
+		nbr_print->prefix = ft_strdup("a");
 }
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
