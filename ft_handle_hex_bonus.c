@@ -18,6 +18,7 @@ void	ft_calc_content_hex(const unsigned long u, t_format_flags *flags,
 	nbr_print->prefix = ft_strdup("a");
 	if (flags->flag_hash == 1)
 	{
+		free(nbr_print->prefix);
 		if (caps)
 			nbr_print->prefix = ft_strdup("0X");
 		else
@@ -26,6 +27,7 @@ void	ft_calc_content_hex(const unsigned long u, t_format_flags *flags,
 	if (u == 0 && flags->precision_set == 1 && flags->precision == 0)
 	{
 		nbr_print->s = ft_strdup("");
+		free(nbr_print->prefix);
 		nbr_print->prefix = ft_strdup("a");
 	}
 	else
