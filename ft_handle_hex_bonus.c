@@ -15,18 +15,18 @@
 void	ft_calc_content_hex(const unsigned long u, t_format_flags *flags,
 		int caps, t_to_print *nbr_print)
 {
-	nbr_print->prefix = "a";
+	nbr_print->prefix = ft_strdup("a");
 	if (flags->flag_hash == 1)
 	{
 		if (caps)
-			nbr_print->prefix = "0X";
+			nbr_print->prefix = ft_strdup("0X");
 		else
-			nbr_print->prefix = "0x";
+			nbr_print->prefix = ft_strdup("0x");
 	}
 	if (u == 0 && flags->precision_set == 1 && flags->precision == 0)
 	{
 		nbr_print->s = ft_strdup("");
-		nbr_print->prefix = "a";
+		nbr_print->prefix = ft_strdup("a");
 	}
 	else
 		nbr_print->s = ft_hextoa(u, caps);
