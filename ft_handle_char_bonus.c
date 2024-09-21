@@ -13,7 +13,7 @@
 
 static void	ft_calc_content(const char c, t_to_print *nbr_print)
 {
-	nbr_print->s = ft_strdup("");
+	nbr_print->s = ft_strdup(" ");
 	nbr_print->s[0] = c;
 	nbr_print->s[1] = '\0';
 	nbr_print->cpad = ' ';
