@@ -21,6 +21,7 @@ static void	ft_calc_content(const char *s, t_format_flags *flags,
 		nbr_print->s = ft_strdup(s);
 	if (flags->precision_set)
 	{
+		free(nbr_print->s);
 		if (flags->precision == 0)
 			nbr_print->s = ft_strdup("");
 		else
