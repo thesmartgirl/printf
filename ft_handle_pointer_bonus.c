@@ -15,9 +15,9 @@ static void	ft_calc_content_ptr(const uintptr_t ptr, t_format_flags *flags,
 		t_to_print *nbr_print)
 {
 	if (ptr != 0)
-		nbr_print->prefix = "0x";
+		nbr_print->prefix = ft_strdup("0x");
 	else
-		nbr_print->prefix = "a";
+		nbr_print->prefix = ft_strdup("a");
 	if (ptr == 0)
 		nbr_print->s = ft_strdup("(nil)");
 	else
