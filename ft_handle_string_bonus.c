@@ -14,7 +14,8 @@
 static void	ft_calc_content(const char *s, t_format_flags *flags,
 		t_to_print *nbr_print)
 {
-	char *temp;
+	char	*temp;
+
 	if (s == NULL)
 		//	nbr_print->s = ft_strdup("(null)");
 		nbr_print->s = ft_strdup("");
