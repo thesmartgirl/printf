@@ -18,7 +18,7 @@ static void	ft_calc_content(const int i, t_format_flags *flags,
 		nbr_print->s = ft_strdup("");
 	else if (i > 0)
 	{
-		free(nbr_print->s)
+		free(nbr_print->s);
 		nbr_print->s = ft_itoa(i);
 	}
 	else if (i == -2147483648)
