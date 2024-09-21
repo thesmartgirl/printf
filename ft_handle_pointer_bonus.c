@@ -55,7 +55,7 @@ int	ft_handle_pointer(va_list *args, t_format_flags *flags)
 	t_to_print	nbr_print;
 
 	ptr = (uintptr_t)va_arg(*args, void *);
-  ft_bzero(&nbr_print, sizeof(t_to_print));
+	ft_bzero(&nbr_print, sizeof(t_to_print));
 	ft_calc_content_ptr(ptr, flags, &nbr_print);
 	ft_calc_len_ptr(flags, &nbr_print);
 	if (flags->flag_minus)
