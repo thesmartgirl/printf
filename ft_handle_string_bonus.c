@@ -14,6 +14,7 @@
 static void	ft_calc_content(const char *s, t_format_flags *flags,
 		t_to_print *nbr_print)
 {
+	char *temp;
 	if (s == NULL)
 		//	nbr_print->s = ft_strdup("(null)");
 		nbr_print->s = ft_strdup("");
@@ -21,15 +22,13 @@ static void	ft_calc_content(const char *s, t_format_flags *flags,
 		nbr_print->s = ft_strdup(s);
 	if (flags->precision_set)
 	{
+		temp = nbr_print->s;
 		if (flags->precision == 0)
-		{
-			free(nbr_print->s);
 			nbr_print->s = ft_strdup("");
-		}
 		else
 			nbr_print->s = ft_substr(nbr_print->s, 0, flags->precision);
+		free(temp);
 	}
-	printf("s = %s\n", nbr_print->s);
 	nbr_print->digits = ft_strlen(nbr_print->s);
 	nbr_print->cpad = ' ';
 	nbr_print->prefix = ft_strdup("a");
