@@ -27,6 +27,7 @@ static void	ft_calc_content(const char *s, t_format_flags *flags,
 		else
 			nbr_print->s = ft_substr(nbr_print->s, 0, flags->precision);
 	}
+	printf("s = %s\\n", nbr_print->s);
 	nbr_print->digits = ft_strlen(nbr_print->s);
 	nbr_print->cpad = ' ';
 	nbr_print->prefix = ft_strdup("a");
