@@ -16,13 +16,16 @@ static void	ft_calc_content(const unsigned int u, t_format_flags *flags,
 {
 	nbr_print->s = ft_uitoa(u);
 	if (u == 0 && flags->precision_set == 1 && flags->precision == 0)
+	{
+		free(nbr_print->s);
 		nbr_print->s = ft_strdup("");
+	}
 	nbr_print->digits = ft_strlen(nbr_print->s);
 	if (flags->flag_zero && !(flags->flag_minus) && flags->precision_set == 0)
 		nbr_print->cpad = '0';
 	else
 		nbr_print->cpad = ' ';
-	nbr_print->prefix = "a";
+	nbr_print->prefix = ft_strdup("a");
 }
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
