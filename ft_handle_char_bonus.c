@@ -11,13 +11,10 @@
 /* ************************************************************************** */
 #include "ft_printf_bonus.h"
 
-static void	ft_calc_content(const char c, t_to_print *nbr_print)
+static void	ft_calc_content(const int c, t_to_print *nbr_print)
 {
-	nbr_print->s = ft_strdup(" ");
-	nbr_print->s[0] = c;
-	nbr_print->s[1] = '\0';
-	nbr_print->cpad = ' ';
-	nbr_print->prefix = ft_strdup("a");
+	nbr_print->print_char = 1;
+	nbr_print->cprint = c;
 }
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
@@ -31,17 +28,15 @@ static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 	nbr_print->digits = 0;
 }
 
-int	ft_handle_char(va_list *args, t_format_flags *flags)
+int	ft_handle_char(va_list *args, t_format_flags *flags, t_to_print *nbr_print)
 {
-	int			c;
-	t_to_print	nbr_print;
+	int	c;
 
 	c = va_arg(*args, int);
-	ft_bzero(&nbr_print, sizeof(t_to_print));
-	ft_calc_content(c, &nbr_print);
-	ft_calc_len(flags, &nbr_print);
+	ft_calc_content(c, nbr_print);
+	ft_calc_len(flags, nbr_print);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(&nbr_print));
+		return (ft_print_left_adj(nbr_print));
 	else
-		return (ft_print_right_adj(&nbr_print));
+		return (ft_print_right_adj(nbr_print));
 }

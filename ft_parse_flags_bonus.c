@@ -56,6 +56,7 @@ static void	ft_set_precision(const char **format, t_format_flags *flags)
 	}
 	free(str_precision);
 	*format = p;
+	//printf("flags->precision  = %d\n", flags->precision );
 }
 
 static void	ft_set_flags(const char **format, t_format_flags *flags)

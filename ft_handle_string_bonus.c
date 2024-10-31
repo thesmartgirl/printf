@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_string_bonus.c                              :+:      :+:    :+:   */
+/*   ft_handle_string_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:14:33 by ataan             #+#    #+#             */
-/*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
+/*   Updated: 2024/10/28 15:11:51 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf_bonus.h"
@@ -14,25 +14,27 @@
 static void	ft_calc_content(const char *s, t_format_flags *flags,
 		t_to_print *nbr_print)
 {
-	char	*temp;
-
-	if (s == NULL)
-		//	nbr_print->s = ft_strdup("(null)");
+	free(nbr_print->s);
+	if (s == NULL && flags->precision_set != 1)
+		nbr_print->s = ft_strdup("(null)");
+	else if (s == NULL)
 		nbr_print->s = ft_strdup("");
 	else
 		nbr_print->s = ft_strdup(s);
-	if (flags->precision_set)
+	if (flags->precision_set && s != NULL)
 	{
-		temp = nbr_print->s;
 		if (flags->precision == 0)
+		{
+			free(nbr_print->s);
 			nbr_print->s = ft_strdup("");
+		}
 		else
-			nbr_print->s = ft_substr(nbr_print->s, 0, flags->precision);
-		free(temp);
+		{
+			free(nbr_print->s);
+			nbr_print->s = ft_substr(s, 0, flags->precision);
+		}
 	}
 	nbr_print->digits = ft_strlen(nbr_print->s);
-	nbr_print->cpad = ' ';
-	nbr_print->prefix = ft_strdup("a");
 }
 
 static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
@@ -44,17 +46,16 @@ static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 	nbr_print->pads = nbr_print->tot_len - nbr_print->digits;
 }
 
-int	ft_handle_string(va_list *args, t_format_flags *flags)
+int	ft_handle_string(va_list *args, t_format_flags *flags,
+		t_to_print *nbr_print)
 {
-	char		*s;
-	t_to_print	nbr_print;
+	char	*s;
 
 	s = va_arg(*args, char *);
-	ft_bzero(&nbr_print, sizeof(t_to_print));
-	ft_calc_content(s, flags, &nbr_print);
-	ft_calc_len(flags, &nbr_print);
+	ft_calc_content(s, flags, nbr_print);
+	ft_calc_len(flags, nbr_print);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(&nbr_print));
+		return (ft_print_left_adj(nbr_print));
 	else
-		return (ft_print_right_adj(&nbr_print));
+		return (ft_print_right_adj(nbr_print));
 }
