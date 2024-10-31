@@ -15,10 +15,8 @@ static void	ft_calc_content(const char *s, t_format_flags *flags,
 		t_to_print *nbr_print)
 {
 	free(nbr_print->s);
-	if (s == NULL && flags->precision_set != 1)
+	if (s == NULL)
 		nbr_print->s = ft_strdup("(null)");
-	else if (s == NULL)
-		nbr_print->s = ft_strdup("");
 	else
 		nbr_print->s = ft_strdup(s);
 	if (flags->precision_set && s != NULL)
