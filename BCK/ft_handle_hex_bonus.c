@@ -13,65 +13,65 @@
 #include "ft_printf_bonus.h"
 
 void	ft_calc_content_hex(const unsigned int u, t_format_flags *flags,
-		int caps, t_to_print *printTxt)
+		int caps, t_to_print *nbr_print)
 {
 	if (flags->flag_hash == 1 && u != 0)
 	{
-		free(printTxt->prefix);
+		free(nbr_print->prefix);
 		if (caps)
 		{
-			printTxt->prefix = ft_strdup("0X");
+			nbr_print->prefix = ft_strdup("0X");
 		}
 		else
 		{
-			printTxt->prefix = ft_strdup("0x");
+			nbr_print->prefix = ft_strdup("0x");
 		}
 	}
 	if (u == 0 && flags->precision_set == 1 && flags->precision == 0)
 	{
-		free(printTxt->s);
-		printTxt->s = ft_strdup("");
+		free(nbr_print->s);
+		nbr_print->s = ft_strdup("");
 	}
 	else
 	{
-		free(printTxt->s);
-		printTxt->s = ft_hextoa(u, caps);
+		free(nbr_print->s);
+		nbr_print->s = ft_hextoa(u, caps);
 	}
-	printTxt->digits = ft_strlen(printTxt->s);
+	nbr_print->digits = ft_strlen(nbr_print->s);
 	if (flags->flag_zero && !(flags->flag_minus) && flags->precision_set == 0)
-		printTxt->cpad = '0';
+		nbr_print->cpad = '0';
 }
 
-void	ft_calc_len_hex(t_format_flags *flags, t_to_print *printTxt)
+void	ft_calc_len_hex(t_format_flags *flags, t_to_print *nbr_print)
 {
 	int	prefix_len;
 
-	prefix_len = 2 * (printTxt->prefix[0] != 'a');
-	printTxt->tot_len = flags->field_width;
-	if (flags->precision > printTxt->digits)
+	prefix_len = 2 * (nbr_print->prefix[0] != 'a');
+	nbr_print->tot_len = flags->field_width;
+	if (flags->precision > nbr_print->digits)
 	{
-		if (printTxt->tot_len < flags->precision + prefix_len)
-			printTxt->tot_len = flags->precision + prefix_len;
+		if (nbr_print->tot_len < flags->precision + prefix_len)
+			nbr_print->tot_len = flags->precision + prefix_len;
 	}
-	else if (printTxt->tot_len < printTxt->digits
-		+ (printTxt->prefix[0] != 'a'))
-		printTxt->tot_len = printTxt->digits + prefix_len;
-	printTxt->zeros = 0;
-	if (flags->precision > printTxt->digits)
-		printTxt->zeros = flags->precision - printTxt->digits;
-	printTxt->pads = printTxt->tot_len - prefix_len - printTxt->zeros
-		- printTxt->digits;
+	else if (nbr_print->tot_len < nbr_print->digits
+		+ (nbr_print->prefix[0] != 'a'))
+		nbr_print->tot_len = nbr_print->digits + prefix_len;
+	nbr_print->zeros = 0;
+	if (flags->precision > nbr_print->digits)
+		nbr_print->zeros = flags->precision - nbr_print->digits;
+	nbr_print->pads = nbr_print->tot_len - prefix_len - nbr_print->zeros
+		- nbr_print->digits;
 }
 
-int	ft_handle_hex(va_list *args, t_format_flags *flags, t_to_print *printTxt)
+int	ft_handle_hex(va_list *args, t_format_flags *flags, t_to_print *nbr_print)
 {
 	unsigned int	u;
 
 	u = va_arg(*args, unsigned int);
-	ft_calc_content_hex(u, flags, 0, printTxt);
-	ft_calc_len_hex(flags, printTxt);
+	ft_calc_content_hex(u, flags, 0, nbr_print);
+	ft_calc_len_hex(flags, nbr_print);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(printTxt));
+		return (ft_print_left_adj(nbr_print));
 	else
-		return (ft_print_right_adj(printTxt));
+		return (ft_print_right_adj(nbr_print));
 }

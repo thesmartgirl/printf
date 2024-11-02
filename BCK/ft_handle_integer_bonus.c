@@ -12,75 +12,75 @@
 #include "ft_printf_bonus.h"
 
 static void	ft_calc_s(const int i, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *nbr_print)
 {
-	free(printTxt->s);
+	free(nbr_print->s);
 	if (i == 0 && flags->precision_set == 1 && flags->precision == 0)
-		printTxt->s = ft_strdup("");
+		nbr_print->s = ft_strdup("");
 	else if (i > 0)
-		printTxt->s = ft_itoa(i);
+		nbr_print->s = ft_itoa(i);
 	else if (i == -2147483648)
-		printTxt->s = ft_strdup("2147483648");
+		nbr_print->s = ft_strdup("2147483648");
 	else
-		printTxt->s = ft_itoa(-i);
+		nbr_print->s = ft_itoa(-i);
 }
 
 static void	ft_calc_content(const int i, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *nbr_print)
 {
-	ft_calc_s(i, flags, printTxt);
-	printTxt->digits = ft_strlen(printTxt->s);
+	ft_calc_s(i, flags, nbr_print);
+	nbr_print->digits = ft_strlen(nbr_print->s);
 	if (flags->flag_zero && !(flags->flag_minus) && flags->precision_set == 0)
-		printTxt->cpad = '0';
+		nbr_print->cpad = '0';
 	else
-		printTxt->cpad = ' ';
+		nbr_print->cpad = ' ';
 	if (i < 0)
 	{
-		free(printTxt->prefix);
-		printTxt->prefix = ft_strdup("-");
+		free(nbr_print->prefix);
+		nbr_print->prefix = ft_strdup("-");
 	}
 	else if (flags->flag_plus && i >= 0)
 	{
-		free(printTxt->prefix);
-		printTxt->prefix = ft_strdup("+");
+		free(nbr_print->prefix);
+		nbr_print->prefix = ft_strdup("+");
 	}
 	else if (flags->flag_space && i >= 0)
 	{
-		free(printTxt->prefix);
-		printTxt->prefix = ft_strdup(" ");
+		free(nbr_print->prefix);
+		nbr_print->prefix = ft_strdup(" ");
 	}
 }
 
-static void	ft_calc_len(t_format_flags *flags, t_to_print *printTxt)
+static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 {
-	printTxt->tot_len = flags->field_width;
-	if (flags->precision > printTxt->digits)
+	nbr_print->tot_len = flags->field_width;
+	if (flags->precision > nbr_print->digits)
 	{
-		if (printTxt->tot_len < flags->precision
-			+ (printTxt->prefix[0] != 'a'))
-			printTxt->tot_len = flags->precision
-				+ (printTxt->prefix[0] != 'a');
+		if (nbr_print->tot_len < flags->precision
+			+ (nbr_print->prefix[0] != 'a'))
+			nbr_print->tot_len = flags->precision
+				+ (nbr_print->prefix[0] != 'a');
 	}
-	else if (printTxt->tot_len < printTxt->digits
-		+ (printTxt->prefix[0] != 'a'))
-		printTxt->tot_len = printTxt->digits + (printTxt->prefix[0] != 'a');
-	printTxt->zeros = 0;
-	if (flags->precision > printTxt->digits)
-		printTxt->zeros = flags->precision - printTxt->digits;
-	printTxt->pads = printTxt->tot_len - (printTxt->prefix[0] != 'a')
-		- printTxt->zeros - printTxt->digits;
+	else if (nbr_print->tot_len < nbr_print->digits
+		+ (nbr_print->prefix[0] != 'a'))
+		nbr_print->tot_len = nbr_print->digits + (nbr_print->prefix[0] != 'a');
+	nbr_print->zeros = 0;
+	if (flags->precision > nbr_print->digits)
+		nbr_print->zeros = flags->precision - nbr_print->digits;
+	nbr_print->pads = nbr_print->tot_len - (nbr_print->prefix[0] != 'a')
+		- nbr_print->zeros - nbr_print->digits;
 }
 
 int	ft_handle_integer(va_list *args, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *nbr_print)
 {
 	int	i;
 
 	i = va_arg(*args, int);
-	ft_calc_content(i, flags, printTxt);
-	ft_calc_len(flags, printTxt);
+	ft_calc_content(i, flags, nbr_print);
+	ft_calc_len(flags, nbr_print);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(printTxt));
+		return (ft_print_left_adj(nbr_print));
 	else
-		return (ft_print_right_adj(printTxt));
+		return (ft_print_right_adj(nbr_print));
 }

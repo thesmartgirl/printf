@@ -30,20 +30,20 @@ static t_format_func	*init_format_handlers(void)
 	return (format_handlers);
 }
 
-static t_to_print	ft_initialize_printTxt(void)
+static t_to_print	ft_initialize_nbr_print(void)
 {
-	t_to_print	printTxt;
+	t_to_print	nbr_print;
 
-	printTxt.digits = 0;
-	printTxt.zeros = 0;
-	printTxt.tot_len = 0;
-	printTxt.pads = 0;
-	printTxt.s = ft_strdup("");
-	printTxt.prefix = ft_strdup("a");
-	printTxt.cpad = ' ';
-	printTxt.cprint = 0;
-	printTxt.print_char = 0;
-	return (printTxt);
+	nbr_print.digits = 0;
+	nbr_print.zeros = 0;
+	nbr_print.tot_len = 0;
+	nbr_print.pads = 0;
+	nbr_print.s = ft_strdup("");
+	nbr_print.prefix = ft_strdup("a");
+	nbr_print.cpad = ' ';
+	nbr_print.cprint = 0;
+	nbr_print.print_char = 0;
+	return (nbr_print);
 }
 
 static int	ft_parse_and_print(va_list *args, const char *fmt,
@@ -52,7 +52,7 @@ static int	ft_parse_and_print(va_list *args, const char *fmt,
 	int				ret;
 	t_format_flags	flags;
 	t_format_func	handler;
-	t_to_print		printTxt;
+	t_to_print		nbr_print;
 
 	ret = 0;
 	while (*fmt)
@@ -62,9 +62,9 @@ static int	ft_parse_and_print(va_list *args, const char *fmt,
 			fmt++;
 			ft_parse_flags(&fmt, &flags);
 			handler = format_handlers[(int)*fmt];
-			printTxt = ft_initialize_printTxt();
+			nbr_print = ft_initialize_nbr_print();
 			if (handler)
-				ret += handler(args, &flags, &printTxt);
+				ret += handler(args, &flags, &nbr_print);
 		}
 		else
 		{

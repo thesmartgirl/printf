@@ -12,52 +12,52 @@
 #include "ft_printf_bonus.h"
 
 static void	ft_calc_content(const char *s, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *nbr_print)
 {
-	free(printTxt->s);
+	free(nbr_print->s);
 	if (s == NULL)
-		printTxt->s = ft_strdup("(null)");
+		nbr_print->s = ft_strdup("(null)");
 	else
-		printTxt->s = ft_strdup(s);
+		nbr_print->s = ft_strdup(s);
 	//this is new
 	if (s == NULL && flags->precision_set == 1 && flags->precision < 6 )
-		printTxt->s = ft_strdup("");
+		nbr_print->s = ft_strdup("");
 	//this is new
 	if (flags->precision_set && s != NULL)
 	{
 		if (flags->precision == 0)
 		{
-			free(printTxt->s);
-			printTxt->s = ft_strdup("");
+			free(nbr_print->s);
+			nbr_print->s = ft_strdup("");
 		}
 		else
 		{
-			free(printTxt->s);
-			printTxt->s = ft_substr(s, 0, flags->precision);
+			free(nbr_print->s);
+			nbr_print->s = ft_substr(s, 0, flags->precision);
 		}
 	}
-	printTxt->digits = ft_strlen(printTxt->s);
+	nbr_print->digits = ft_strlen(nbr_print->s);
 }
 
-static void	ft_calc_len(t_format_flags *flags, t_to_print *printTxt)
+static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 {
-	printTxt->tot_len = flags->field_width;
-	if (printTxt->tot_len < printTxt->digits)
-		printTxt->tot_len = printTxt->digits;
-	printTxt->zeros = 0;
-	printTxt->pads = printTxt->tot_len - printTxt->digits;
+	nbr_print->tot_len = flags->field_width;
+	if (nbr_print->tot_len < nbr_print->digits)
+		nbr_print->tot_len = nbr_print->digits;
+	nbr_print->zeros = 0;
+	nbr_print->pads = nbr_print->tot_len - nbr_print->digits;
 }
 
 int	ft_handle_string(va_list *args, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *nbr_print)
 {
 	char	*s;
 
 	s = va_arg(*args, char *);
-	ft_calc_content(s, flags, printTxt);
-	ft_calc_len(flags, printTxt);
+	ft_calc_content(s, flags, nbr_print);
+	ft_calc_len(flags, nbr_print);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(printTxt));
+		return (ft_print_left_adj(nbr_print));
 	else
-		return (ft_print_right_adj(printTxt));
+		return (ft_print_right_adj(nbr_print));
 }

@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_hex_caps_bonus.c                         :+:      :+:    :+:   */
+/*   ft_handle_integer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:14:33 by ataan             #+#    #+#             */
-/*   Updated: 2024/09/08 17:26:15 by ataan            ###   ########.fr       */
+/*   Updated: 2024/09/11 16:50:46 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
-int	ft_handle_hex_caps(va_list *args, t_format_flags *flags,
-		t_to_print *printTxt)
+int	ft_handle_integer(va_list *args)
 {
-	unsigned long	u;
+	int		i;
+	int		len;
+	char	*s;
 
-	u = va_arg(*args, unsigned long);
-	ft_calc_content_hex(u, flags, 1, printTxt);
-	ft_calc_len_hex(flags, printTxt);
-	if (flags->flag_minus)
-		return (ft_print_left_adj(printTxt));
-	else
-		return (ft_print_right_adj(printTxt));
+	i = va_arg(*args, int);
+	s = ft_itoa(i);
+	ft_putstr_fd(s, 1);
+	len = ft_strlen(s);
+	free(s);
+	return (len);
 }

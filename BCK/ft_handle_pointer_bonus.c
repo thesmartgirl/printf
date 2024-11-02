@@ -12,58 +12,58 @@
 #include "ft_printf_bonus.h"
 
 static void	ft_calc_content_ptr(const uintptr_t ptr, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *nbr_print)
 {
 	if (ptr != 0)
 	{
-		free(printTxt->prefix);
-		printTxt->prefix = ft_strdup("0x");
+		free(nbr_print->prefix);
+		nbr_print->prefix = ft_strdup("0x");
 	}
 	if (ptr == 0)
 	{
-		free(printTxt->s);
-		printTxt->s = ft_strdup("(nil)");
+		free(nbr_print->s);
+		nbr_print->s = ft_strdup("(nil)");
 	}
 	else
 	{
-		free(printTxt->s);
-		printTxt->s = ft_ptrtoa(ptr);
+		free(nbr_print->s);
+		nbr_print->s = ft_ptrtoa(ptr);
 	}
-	printTxt->digits = ft_strlen(printTxt->s);
+	nbr_print->digits = ft_strlen(nbr_print->s);
 	if (flags->flag_zero && !(flags->flag_minus) && flags->precision_set == 0)
-		printTxt->cpad = '0';
+		nbr_print->cpad = '0';
 }
 
-static void	ft_calc_len_ptr(t_format_flags *flags, t_to_print *printTxt)
+static void	ft_calc_len_ptr(t_format_flags *flags, t_to_print *nbr_print)
 {
-	printTxt->tot_len = flags->field_width;
-	if (flags->precision > printTxt->digits && printTxt->s[0] != '(')
+	nbr_print->tot_len = flags->field_width;
+	if (flags->precision > nbr_print->digits && nbr_print->s[0] != '(')
 	{
-		if (printTxt->tot_len < flags->precision + 2)
-			printTxt->tot_len = flags->precision + 2;
+		if (nbr_print->tot_len < flags->precision + 2)
+			nbr_print->tot_len = flags->precision + 2;
 	}
-	else if (printTxt->tot_len < printTxt->digits + 2
-		&& printTxt->s[0] != '(')
-		printTxt->tot_len = printTxt->digits + 2;
-	else if (printTxt->tot_len < printTxt->digits)
-		printTxt->tot_len = printTxt->digits;
-	printTxt->zeros = 0;
-	if (flags->precision > printTxt->digits && printTxt->s[0] != '(')
-		printTxt->zeros = flags->precision - printTxt->digits;
-	printTxt->pads = printTxt->tot_len - 2 * (printTxt->s[0] != '(')
-		- printTxt->zeros - printTxt->digits;
+	else if (nbr_print->tot_len < nbr_print->digits + 2
+		&& nbr_print->s[0] != '(')
+		nbr_print->tot_len = nbr_print->digits + 2;
+	else if (nbr_print->tot_len < nbr_print->digits)
+		nbr_print->tot_len = nbr_print->digits;
+	nbr_print->zeros = 0;
+	if (flags->precision > nbr_print->digits && nbr_print->s[0] != '(')
+		nbr_print->zeros = flags->precision - nbr_print->digits;
+	nbr_print->pads = nbr_print->tot_len - 2 * (nbr_print->s[0] != '(')
+		- nbr_print->zeros - nbr_print->digits;
 }
 
 int	ft_handle_pointer(va_list *args, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *nbr_print)
 {
 	uintptr_t	ptr;
 
 	ptr = (uintptr_t)va_arg(*args, void *);
-	ft_calc_content_ptr(ptr, flags, printTxt);
-	ft_calc_len_ptr(flags, printTxt);
+	ft_calc_content_ptr(ptr, flags, nbr_print);
+	ft_calc_len_ptr(flags, nbr_print);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(printTxt));
+		return (ft_print_left_adj(nbr_print));
 	else
-		return (ft_print_right_adj(printTxt));
+		return (ft_print_right_adj(nbr_print));
 }

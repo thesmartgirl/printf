@@ -11,32 +11,32 @@
 /* ************************************************************************** */
 #include "ft_printf_bonus.h"
 
-static void	ft_calc_content(const int c, t_to_print *printTxt)
+static void	ft_calc_content(const int c, t_to_print *nbr_print)
 {
-	printTxt->print_char = 1;
-	printTxt->cprint = c;
+	nbr_print->print_char = 1;
+	nbr_print->cprint = c;
 }
 
-static void	ft_calc_len(t_format_flags *flags, t_to_print *printTxt)
+static void	ft_calc_len(t_format_flags *flags, t_to_print *nbr_print)
 {
 	if (flags->field_width > 0)
-		printTxt->tot_len = flags->field_width;
+		nbr_print->tot_len = flags->field_width;
 	else
-		printTxt->tot_len = 1;
-	printTxt->pads = printTxt->tot_len - 1;
-	printTxt->zeros = 0;
-	printTxt->digits = 0;
+		nbr_print->tot_len = 1;
+	nbr_print->pads = nbr_print->tot_len - 1;
+	nbr_print->zeros = 0;
+	nbr_print->digits = 0;
 }
 
-int	ft_handle_char(va_list *args, t_format_flags *flags, t_to_print *printTxt)
+int	ft_handle_char(va_list *args, t_format_flags *flags, t_to_print *nbr_print)
 {
 	int	c;
 
 	c = va_arg(*args, int);
-	ft_calc_content(c, printTxt);
-	ft_calc_len(flags, printTxt);
+	ft_calc_content(c, nbr_print);
+	ft_calc_len(flags, nbr_print);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(printTxt));
+		return (ft_print_left_adj(nbr_print));
 	else
-		return (ft_print_right_adj(printTxt));
+		return (ft_print_right_adj(nbr_print));
 }

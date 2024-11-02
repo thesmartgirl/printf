@@ -12,54 +12,54 @@
 
 #include "ft_printf_bonus.h"
 
-int	ft_print_left_adj(t_to_print *nbr_print)
+int	ft_print_left_adj(t_to_print *printTxt)
 {
-	if (nbr_print->prefix[0] != 'a')
-		ft_putstr_fd(nbr_print->prefix, 1);
-	while (nbr_print->zeros-- > 0)
+	if (printTxt->prefix[0] != 'a')
+		ft_putstr_fd(printTxt->prefix, 1);
+	while (printTxt->zeros-- > 0)
 		ft_putchar_fd('0', 1);
-	if (nbr_print->print_char != 0)
+	if (printTxt->print_char != 0)
 	{
-		ft_putchar_fd(nbr_print->cprint, 1);
+		ft_putchar_fd(printTxt->cprint, 1);
 	}
 	else
-		ft_putstr_fd(nbr_print->s, 1);
-	while (nbr_print->pads-- > 0)
-		ft_putchar_fd(nbr_print->cpad, 1);
-	if (nbr_print->s != NULL)
+		ft_putstr_fd(printTxt->s, 1);
+	while (printTxt->pads-- > 0)
+		ft_putchar_fd(printTxt->cpad, 1);
+	if (printTxt->s != NULL)
 	{
-		free(nbr_print->s);
+		free(printTxt->s);
 	}
-	if (nbr_print->prefix != NULL)
+	if (printTxt->prefix != NULL)
 	{
-		free(nbr_print->prefix);
+		free(printTxt->prefix);
 	}
-	return (nbr_print->tot_len);
+	return (printTxt->tot_len);
 }
 
-int	ft_print_right_adj(t_to_print *nbr_print)
+int	ft_print_right_adj(t_to_print *printTxt)
 {
-	if (nbr_print->cpad == ' ')
+	if (printTxt->cpad == ' ')
 	{
-		while (nbr_print->pads-- > 0)
-			ft_putchar_fd(nbr_print->cpad, 1);
+		while (printTxt->pads-- > 0)
+			ft_putchar_fd(printTxt->cpad, 1);
 	}
-	if (nbr_print->prefix[0] != 'a')
-		ft_putstr_fd(nbr_print->prefix, 1);
-	if (nbr_print->cpad == '0')
+	if (printTxt->prefix[0] != 'a')
+		ft_putstr_fd(printTxt->prefix, 1);
+	if (printTxt->cpad == '0')
 	{
-		while (nbr_print->pads-- > 0)
-			ft_putchar_fd(nbr_print->cpad, 1);
+		while (printTxt->pads-- > 0)
+			ft_putchar_fd(printTxt->cpad, 1);
 	}
-	while (nbr_print->zeros-- > 0)
+	while (printTxt->zeros-- > 0)
 		ft_putchar_fd('0', 1);
-	if (nbr_print->print_char != 0)
-		ft_putchar_fd(nbr_print->cprint, 1);
+	if (printTxt->print_char != 0)
+		ft_putchar_fd(printTxt->cprint, 1);
 	else
-		ft_putstr_fd(nbr_print->s, 1);
-	if (nbr_print->s != NULL)
-		free(nbr_print->s);
-	if (nbr_print->prefix != NULL)
-		free(nbr_print->prefix);
-	return (nbr_print->tot_len);
+		ft_putstr_fd(printTxt->s, 1);
+	if (printTxt->s != NULL)
+		free(printTxt->s);
+	if (printTxt->prefix != NULL)
+		free(printTxt->prefix);
+	return (printTxt->tot_len);
 }

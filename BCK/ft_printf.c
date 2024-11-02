@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:14:33 by ataan             #+#    #+#             */
-/*   Updated: 2024/09/17 11:41:12 by ataan            ###   ########.fr       */
+/*   Updated: 2024/09/17 11:41:43 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 static t_format_func	*init_format_handlers(void)
 {
@@ -30,41 +30,23 @@ static t_format_func	*init_format_handlers(void)
 	return (format_handlers);
 }
 
-static t_to_print	ft_initialize_printTxt(void)
-{
-	t_to_print	printTxt;
-
-	printTxt.digits = 0;
-	printTxt.zeros = 0;
-	printTxt.tot_len = 0;
-	printTxt.pads = 0;
-	printTxt.s = ft_strdup("");
-	printTxt.prefix = ft_strdup("a");
-	printTxt.cpad = ' ';
-	printTxt.cprint = 0;
-	printTxt.print_char = 0;
-	return (printTxt);
-}
-
-static int	ft_parse_and_print(va_list *args, const char *fmt,
-		t_format_func *format_handlers)
+int	ft_printf(const char *fmt, ...)
 {
 	int				ret;
-	t_format_flags	flags;
+	va_list			args;
+	t_format_func	*format_handlers;
 	t_format_func	handler;
-	t_to_print		printTxt;
 
+	va_start(args, fmt);
+	format_handlers = init_format_handlers();
 	ret = 0;
 	while (*fmt)
 	{
-		if (*fmt == '%')
+		if (*fmt == '%' && format_handlers[(int)*(fmt + 1)])
 		{
 			fmt++;
-			ft_parse_flags(&fmt, &flags);
 			handler = format_handlers[(int)*fmt];
-			printTxt = ft_initialize_printTxt();
-			if (handler)
-				ret += handler(args, &flags, &printTxt);
+			ret += handler(&args);
 		}
 		else
 		{
@@ -73,18 +55,6 @@ static int	ft_parse_and_print(va_list *args, const char *fmt,
 		}
 		fmt++;
 	}
-	return (ret);
-}
-
-int	ft_printf(const char *fmt, ...)
-{
-	int				ret;
-	va_list			args;
-	t_format_func	*format_handlers;
-
-	va_start(args, fmt);
-	format_handlers = init_format_handlers();
-	ret = ft_parse_and_print(&args, fmt, format_handlers);
 	va_end(args);
 	return (ret);
 }
