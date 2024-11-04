@@ -12,47 +12,47 @@
 #include "ft_printf_bonus.h"
 
 static void	ft_calc_content(const unsigned int u, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *print_txt)
 {
-	free(printTxt->s);
-	printTxt->s = ft_uitoa(u);
+	free(print_txt->s);
+	print_txt->s = ft_uitoa(u);
 	if (u == 0 && flags->precision_set == 1 && flags->precision == 0)
-		printTxt->s = ft_strdup("");
-	printTxt->digits = ft_strlen(printTxt->s);
+		print_txt->s = ft_strdup("");
+	print_txt->digits = ft_strlen(print_txt->s);
 	if (flags->flag_zero && !(flags->flag_minus) && flags->precision_set == 0)
-		printTxt->cpad = '0';
+		print_txt->cpad = '0';
 }
 
-static void	ft_calc_len(t_format_flags *flags, t_to_print *printTxt)
+static void	ft_calc_len(t_format_flags *flags, t_to_print *print_txt)
 {
-	printTxt->tot_len = flags->field_width;
-	if (flags->precision > printTxt->digits)
+	print_txt->tot_len = flags->field_width;
+	if (flags->precision > print_txt->digits)
 	{
-		if (printTxt->tot_len < flags->precision
-			+ (printTxt->prefix[0] != 'a'))
-			printTxt->tot_len = flags->precision
-				+ (printTxt->prefix[0] != 'a');
+		if (print_txt->tot_len < flags->precision
+			+ (print_txt->prefix[0] != 'a'))
+			print_txt->tot_len = flags->precision
+				+ (print_txt->prefix[0] != 'a');
 	}
-	else if (printTxt->tot_len < printTxt->digits
-		+ (printTxt->prefix[0] != 'a'))
-		printTxt->tot_len = printTxt->digits + (printTxt->prefix[0] != 'a');
-	printTxt->zeros = 0;
-	if (flags->precision > printTxt->digits)
-		printTxt->zeros = flags->precision - printTxt->digits;
-	printTxt->pads = printTxt->tot_len - (printTxt->prefix[0] != 'a')
-		- printTxt->zeros - printTxt->digits;
+	else if (print_txt->tot_len < print_txt->digits
+		+ (print_txt->prefix[0] != 'a'))
+		print_txt->tot_len = print_txt->digits + (print_txt->prefix[0] != 'a');
+	print_txt->zeros = 0;
+	if (flags->precision > print_txt->digits)
+		print_txt->zeros = flags->precision - print_txt->digits;
+	print_txt->pads = print_txt->tot_len - (print_txt->prefix[0] != 'a')
+		- print_txt->zeros - print_txt->digits;
 }
 
 int	ft_handle_udecimal(va_list *args, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *print_txt)
 {
 	unsigned int	u;
 
 	u = (unsigned int)va_arg(*args, unsigned int);
-	ft_calc_content(u, flags, printTxt);
-	ft_calc_len(flags, printTxt);
+	ft_calc_content(u, flags, print_txt);
+	ft_calc_len(flags, print_txt);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(printTxt));
+		return (ft_print_left_adj(print_txt));
 	else
-		return (ft_print_right_adj(printTxt));
+		return (ft_print_right_adj(print_txt));
 }

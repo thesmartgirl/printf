@@ -12,52 +12,50 @@
 #include "ft_printf_bonus.h"
 
 static void	ft_calc_content(const char *s, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *print_txt)
 {
-	free(printTxt->s);
+	free(print_txt->s);
 	if (s == NULL)
-		printTxt->s = ft_strdup("(null)");
+		print_txt->s = ft_strdup("(null)");
 	else
-		printTxt->s = ft_strdup(s);
-	//this is new
-	if (s == NULL && flags->precision_set == 1 && flags->precision < 6 )
-		printTxt->s = ft_strdup("");
-	//this is new
+		print_txt->s = ft_strdup(s);
+	if (s == NULL && flags->precision_set == 1 && flags->precision < 6)
+		print_txt->s = ft_strdup("");
 	if (flags->precision_set && s != NULL)
 	{
 		if (flags->precision == 0)
 		{
-			free(printTxt->s);
-			printTxt->s = ft_strdup("");
+			free(print_txt->s);
+			print_txt->s = ft_strdup("");
 		}
 		else
 		{
-			free(printTxt->s);
-			printTxt->s = ft_substr(s, 0, flags->precision);
+			free(print_txt->s);
+			print_txt->s = ft_substr(s, 0, flags->precision);
 		}
 	}
-	printTxt->digits = ft_strlen(printTxt->s);
+	print_txt->digits = ft_strlen(print_txt->s);
 }
 
-static void	ft_calc_len(t_format_flags *flags, t_to_print *printTxt)
+static void	ft_calc_len(t_format_flags *flags, t_to_print *print_txt)
 {
-	printTxt->tot_len = flags->field_width;
-	if (printTxt->tot_len < printTxt->digits)
-		printTxt->tot_len = printTxt->digits;
-	printTxt->zeros = 0;
-	printTxt->pads = printTxt->tot_len - printTxt->digits;
+	print_txt->tot_len = flags->field_width;
+	if (print_txt->tot_len < print_txt->digits)
+		print_txt->tot_len = print_txt->digits;
+	print_txt->zeros = 0;
+	print_txt->pads = print_txt->tot_len - print_txt->digits;
 }
 
 int	ft_handle_string(va_list *args, t_format_flags *flags,
-		t_to_print *printTxt)
+		t_to_print *print_txt)
 {
 	char	*s;
 
 	s = va_arg(*args, char *);
-	ft_calc_content(s, flags, printTxt);
-	ft_calc_len(flags, printTxt);
+	ft_calc_content(s, flags, print_txt);
+	ft_calc_len(flags, print_txt);
 	if (flags->flag_minus)
-		return (ft_print_left_adj(printTxt));
+		return (ft_print_left_adj(print_txt));
 	else
-		return (ft_print_right_adj(printTxt));
+		return (ft_print_right_adj(print_txt));
 }

@@ -43,33 +43,33 @@ typedef struct s_to_print
 }			t_to_print;
 
 typedef int	(*t_format_func)(va_list *args, t_format_flags *flags,
-		t_to_print *printTxt);
+		t_to_print *print_txt);
 
 int			ft_handle_char(va_list *args, t_format_flags *flags,
-				t_to_print *printTxt);
+				t_to_print *print_txt);
 int			ft_handle_string(va_list *args, t_format_flags *flags,
-				t_to_print *printTxt);
+				t_to_print *print_txt);
 int			ft_handle_pointer(va_list *args, t_format_flags *flags,
-				t_to_print *printTxt);
+				t_to_print *print_txt);
 int			ft_handle_udecimal(va_list *args, t_format_flags *flags,
-				t_to_print *printTxt);
+				t_to_print *print_txt);
 int			ft_handle_integer(va_list *args, t_format_flags *flags,
-				t_to_print *printTxt);
+				t_to_print *print_txt);
 int			ft_printf(const char *fmt, ...);
 int			ft_handle_hex(va_list *args, t_format_flags *flags,
-				t_to_print *printTxt);
+				t_to_print *print_txt);
 int			ft_handle_hex_caps(va_list *args, t_format_flags *flags,
-				t_to_print *printTxt);
+				t_to_print *print_txt);
 int			ft_handle_percentage(va_list *args, t_format_flags *flags,
-				t_to_print *printTxt);
-int			ft_print_left_adj(t_to_print *printTxt);
-int			ft_print_right_adj(t_to_print *printTxt);
+				t_to_print *print_txt);
+int			ft_print_left_adj(t_to_print *print_txt);
+int			ft_print_right_adj(t_to_print *print_txt);
 char		*ft_uitoa(unsigned int n);
 char		*ft_hextoa(unsigned int n, int caps);
 char		*ft_ptrtoa(uintptr_t ptr);
 void		ft_parse_flags(const char **fmt, t_format_flags *flags);
 void		ft_calc_content_hex(const unsigned int u, t_format_flags *flags,
-				int caps, t_to_print *printTxt);
-void		ft_calc_len_hex(t_format_flags *flags, t_to_print *printTxt);
+				int caps, t_to_print *print_txt);
+void		ft_calc_len_hex(t_format_flags *flags, t_to_print *print_txt);
 
 #endif

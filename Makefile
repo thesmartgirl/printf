@@ -16,8 +16,6 @@ OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LIBFT_OBJ = $(LIBFT_DIR)/$(.c=.o)
-INCLUDES = -I.
 
 all: $(NAME)
 

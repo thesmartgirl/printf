@@ -6,7 +6,7 @@
 /*   By: ataan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 15:14:33 by ataan             #+#    #+#             */
-/*   Updated: 2024/09/17 11:41:43 by ataan            ###   ########.fr       */
+/*   Updated: 2024/11/04 15:56:50 by ataan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -30,15 +30,12 @@ static t_format_func	*init_format_handlers(void)
 	return (format_handlers);
 }
 
-int	ft_printf(const char *fmt, ...)
+static int	ft_parse_and_print(va_list *args, const char *fmt,
+		t_format_func *format_handlers)
 {
 	int				ret;
-	va_list			args;
-	t_format_func	*format_handlers;
 	t_format_func	handler;
 
-	va_start(args, fmt);
-	format_handlers = init_format_handlers();
 	ret = 0;
 	while (*fmt)
 	{
@@ -46,7 +43,7 @@ int	ft_printf(const char *fmt, ...)
 		{
 			fmt++;
 			handler = format_handlers[(int)*fmt];
-			ret += handler(&args);
+			ret += handler(args);
 		}
 		else
 		{
@@ -55,6 +52,20 @@ int	ft_printf(const char *fmt, ...)
 		}
 		fmt++;
 	}
+	return (ret);
+}
+
+int	ft_printf(const char *fmt, ...)
+{
+	int				ret;
+	va_list			args;
+	t_format_func	*format_handlers;
+
+	if (fmt == NULL)
+		return (-1);
+	va_start(args, fmt);
+	format_handlers = init_format_handlers();
+	ret = ft_parse_and_print(&args, fmt, format_handlers);
 	va_end(args);
 	return (ret);
 }

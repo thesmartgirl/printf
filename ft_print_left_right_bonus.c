@@ -12,54 +12,54 @@
 
 #include "ft_printf_bonus.h"
 
-int	ft_print_left_adj(t_to_print *printTxt)
+int	ft_print_left_adj(t_to_print *print_txt)
 {
-	if (printTxt->prefix[0] != 'a')
-		ft_putstr_fd(printTxt->prefix, 1);
-	while (printTxt->zeros-- > 0)
+	if (print_txt->prefix[0] != 'a')
+		ft_putstr_fd(print_txt->prefix, 1);
+	while (print_txt->zeros-- > 0)
 		ft_putchar_fd('0', 1);
-	if (printTxt->print_char != 0)
+	if (print_txt->print_char != 0)
 	{
-		ft_putchar_fd(printTxt->cprint, 1);
+		ft_putchar_fd(print_txt->cprint, 1);
 	}
 	else
-		ft_putstr_fd(printTxt->s, 1);
-	while (printTxt->pads-- > 0)
-		ft_putchar_fd(printTxt->cpad, 1);
-	if (printTxt->s != NULL)
+		ft_putstr_fd(print_txt->s, 1);
+	while (print_txt->pads-- > 0)
+		ft_putchar_fd(print_txt->cpad, 1);
+	if (print_txt->s != NULL)
 	{
-		free(printTxt->s);
+		free(print_txt->s);
 	}
-	if (printTxt->prefix != NULL)
+	if (print_txt->prefix != NULL)
 	{
-		free(printTxt->prefix);
+		free(print_txt->prefix);
 	}
-	return (printTxt->tot_len);
+	return (print_txt->tot_len);
 }
 
-int	ft_print_right_adj(t_to_print *printTxt)
+int	ft_print_right_adj(t_to_print *print_txt)
 {
-	if (printTxt->cpad == ' ')
+	if (print_txt->cpad == ' ')
 	{
-		while (printTxt->pads-- > 0)
-			ft_putchar_fd(printTxt->cpad, 1);
+		while (print_txt->pads-- > 0)
+			ft_putchar_fd(print_txt->cpad, 1);
 	}
-	if (printTxt->prefix[0] != 'a')
-		ft_putstr_fd(printTxt->prefix, 1);
-	if (printTxt->cpad == '0')
+	if (print_txt->prefix[0] != 'a')
+		ft_putstr_fd(print_txt->prefix, 1);
+	if (print_txt->cpad == '0')
 	{
-		while (printTxt->pads-- > 0)
-			ft_putchar_fd(printTxt->cpad, 1);
+		while (print_txt->pads-- > 0)
+			ft_putchar_fd(print_txt->cpad, 1);
 	}
-	while (printTxt->zeros-- > 0)
+	while (print_txt->zeros-- > 0)
 		ft_putchar_fd('0', 1);
-	if (printTxt->print_char != 0)
-		ft_putchar_fd(printTxt->cprint, 1);
+	if (print_txt->print_char != 0)
+		ft_putchar_fd(print_txt->cprint, 1);
 	else
-		ft_putstr_fd(printTxt->s, 1);
-	if (printTxt->s != NULL)
-		free(printTxt->s);
-	if (printTxt->prefix != NULL)
-		free(printTxt->prefix);
-	return (printTxt->tot_len);
+		ft_putstr_fd(print_txt->s, 1);
+	if (print_txt->s != NULL)
+		free(print_txt->s);
+	if (print_txt->prefix != NULL)
+		free(print_txt->prefix);
+	return (print_txt->tot_len);
 }
