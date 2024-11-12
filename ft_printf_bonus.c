@@ -46,6 +46,12 @@ static t_to_print	ft_initialize_print_txt(void)
 	return (print_txt);
 }
 
+static void	no_handler(const char *fmt, int *ret)
+{
+	ft_putchar_fd(*fmt, 1);
+	*(ret) += 1;
+}
+
 static int	ft_parse_and_print(va_list *args, const char *fmt,
 		t_format_func *format_handlers)
 {
@@ -65,12 +71,11 @@ static int	ft_parse_and_print(va_list *args, const char *fmt,
 			print_txt = ft_initialize_print_txt();
 			if (handler)
 				ret += handler(args, &flags, &print_txt);
+			else
+				return (free(print_txt.s), free(print_txt.prefix), -1);
 		}
 		else
-		{
-			ft_putchar_fd(*fmt, 1);
-			ret++;
-		}
+			no_handler(fmt, &ret);
 		fmt++;
 	}
 	return (ret);

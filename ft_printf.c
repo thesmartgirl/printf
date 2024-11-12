@@ -39,11 +39,14 @@ static int	ft_parse_and_print(va_list *args, const char *fmt,
 	ret = 0;
 	while (*fmt)
 	{
-		if (*fmt == '%' && format_handlers[(int)*(fmt + 1)])
+		if (*fmt == '%')
 		{
 			fmt++;
 			handler = format_handlers[(int)*fmt];
-			ret += handler(args);
+			if (handler)
+				ret += handler(args);
+			else
+				return (-1);
 		}
 		else
 		{

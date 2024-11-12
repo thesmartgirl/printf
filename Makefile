@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -Ilibft
+CFLAGS = -Wall -Wextra -Werror -Ilibft
 AR = ar rcs
 SRC = ft_printf.c ft_handle_integer.c ft_handle_string.c ft_handle_char.c \
 			 ft_handle_hex.c ft_handle_hex_caps.c \
